@@ -2,12 +2,12 @@
   {
     "id": "zeit-architecture",
     "title": "Архитектурная ответственность в zeit ag",
-    "summary": "Техническая ответственность за web, SaaS и on-premise архитектуру зрелого бизнес-продукта.",
+    "summary": "Сквозная техническая ответственность за web, SaaS и on-premise архитектуру зрелого бизнес-продукта.",
     "details": [
-      "Определяю архитектурные решения и направление реализации",
-      "Остаюсь hands-on во frontend, backend и infrastructure"
+      "Архитектурные решения, технические стандарты и стратегия реализации",
+      "Hands-on engineering во frontend, backend, infrastructure и AI-augmented delivery workflows"
     ],
-    "tech": [".NET", "Angular", "Docker", "Kubernetes", "Azure"]
+    "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "NestJS", "Docker", "Terraform", "Azure"]
   },
   {
     "id": "zeit-migration",

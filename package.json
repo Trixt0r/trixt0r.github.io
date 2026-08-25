@@ -10,8 +10,10 @@
     "generate:pdf": "node scripts/generate-pdfs.mjs"
   },
   "dependencies": {
+    "@iconify-json/devicon-plain": "^1.2.57",
     "astro": "^6.2.1",
-    "pdfjs-dist": "^4.3.136"
+    "pdfjs-dist": "^4.3.136",
+    "simple-icons": "^16.28.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.53.0",

@@ -6,16 +6,18 @@
     "location": "Sursee",
     "start": "2023-12",
     "end": null,
-    "summary": "Architekturverantwortung mit weiter stark hands-on gepr\u00e4gter Engineering-Rolle.",
+    "summary": "Architekturverantwortung f\u00fcr eine modulare Business-Plattform, verbunden mit strategischer technischer Ausrichtung und hands-on Produktentwicklung, Delivery und Betrieb.",
     "highlights": [
-      "Definiert Architektur und technische Umsetzungsrichtung",
-      "Entscheidet \u00fcber Refactorings und technische Enabler",
-      "Arbeitet \u00fcber Frontend, Backend und Infrastruktur hinweg",
-      "Koordiniert mit PO, PM und Engineers im In- und Ausland",
-      "Verantwortet technische Aspekte f\u00fcr SaaS- und On-Premise-Betrieb",
-      "Setzt AI-unterst\u00fctzte Workflows f\u00fcr Code, Prototypen und Dokumentation ein"
+      "Architekturleitung, technische Standards und Umsetzungsstrategie f\u00fcr eine gesch\u00e4ftskritische Produktplattform",
+      "Moderne Full-Stack-Plattformentwicklung mit .NET, Angular, NestJS, Node.js und PostgreSQL",
+      "Strategische Refactorings und Technical-Enabler-Planung im Spannungsfeld von Delivery und langfristiger Wartbarkeit",
+      "Frontend-Architektur und Quality Engineering mit Shared Libraries, Storybook, Playwright-End-to-End-Tests und Nx-Monorepo",
+      "Cloud- und Infrastructure-Delivery mit Docker-Workloads, Terraform Infrastructure as Code und Microsoft Azure Services",
+      "Technische F\u00fchrung in der Zusammenarbeit mit Product Owners, Project Managers und verteilten Engineering-Teams",
+      "Produktionsarchitektur und Operational Readiness f\u00fcr SaaS- und On-Premise-Betriebsmodelle",
+      "AI-augmented Software Development mit Claude Code, Codex, Gemini, OpenCode und agentischen Workflows f\u00fcr Coding, Prototyping, Reviews und Dokumentation"
     ],
-    "tech": [".NET", "Angular", "Docker", "Kubernetes", "Azure", "AI tooling"],
+    "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "Playwright", "Storybook", "NestJS", "Docker", "Kubernetes", "Terraform", "Azure", "Claude Code", "Codex", "Gemini", "OpenCode", "Agentic Workflows"],
     "featured": true
   },
   {

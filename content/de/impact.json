@@ -2,12 +2,12 @@
   {
     "id": "zeit-architektur",
     "title": "Architekturverantwortung bei zeit ag",
-    "summary": "Technische Verantwortung f\u00fcr Web, SaaS und On-Premise-Architektur in einem etablierten Business-Produkt.",
+    "summary": "Durchg\u00e4ngige technische Verantwortung f\u00fcr Web-, SaaS- und On-Premise-Architektur eines etablierten Business-Produkts.",
     "details": [
-      "Leitet Architekturentscheidungen und technische Umsetzungsrichtung",
-      "Arbeitet weiterhin hands-on \u00fcber Frontend, Backend und Infrastruktur"
+      "Architekturentscheidungen, technische Standards und Umsetzungsstrategie",
+      "Hands-on Engineering in Frontend, Backend, Infrastruktur und AI-augmented Delivery-Workflows"
     ],
-    "tech": [".NET", "Angular", "Docker", "Kubernetes", "Azure"]
+    "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "NestJS", "Docker", "Terraform", "Azure"]
   },
   {
     "id": "zeit-migration",

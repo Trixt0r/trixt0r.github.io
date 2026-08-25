@@ -1,5 +1,6 @@
 ---
 import type { LocaleContent } from "../lib/types";
+import TechPill from "./TechPill.astro";
 
 interface Props {
   content: LocaleContent;
@@ -15,7 +16,7 @@ const { content } = Astro.props;
       <article class="skill-group">
         <h3>{group.label}</h3>
         <ul class="pill-list">
-          {group.items.map((item) => <li class="pill">{item}</li>)}
+          {group.items.map((item) => <TechPill label={item} />)}
         </ul>
       </article>
     ))}

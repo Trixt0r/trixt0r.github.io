@@ -84,6 +84,17 @@ input {
   border: 1px solid var(--border);
 }
 
+.tech-pill {
+  gap: 0.45rem;
+}
+
+.tech-pill__icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
 .cta-row {
   display: flex;
   flex-wrap: wrap;

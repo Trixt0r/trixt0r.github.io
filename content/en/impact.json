@@ -2,12 +2,12 @@
   {
     "id": "zeit-architecture",
     "title": "Architecture ownership at zeit ag",
-    "summary": "Technical ownership for web, SaaS, and on-premise architecture in an established business product.",
+    "summary": "End-to-end technical ownership of web, SaaS, and on-premises architecture for an established business product.",
     "details": [
-      "Drives architecture decisions and implementation direction",
-      "Still works hands-on across frontend, backend, and infrastructure"
+      "Architecture decisions, technical standards, and implementation strategy",
+      "Hands-on engineering across frontend, backend, infrastructure, and AI-augmented delivery workflows"
     ],
-    "tech": [".NET", "Angular", "Docker", "Kubernetes", "Azure"]
+    "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "NestJS", "Docker", "Terraform", "Azure"]
   },
   {
     "id": "zeit-migration",

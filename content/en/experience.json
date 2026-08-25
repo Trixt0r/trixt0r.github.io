@@ -6,16 +6,18 @@
     "location": "Sursee",
     "start": "2023-12",
     "end": null,
-    "summary": "Architecture ownership combined with a strongly hands-on engineering role.",
+    "summary": "Architecture leadership for a modular business platform, combining strategic technical direction with hands-on product engineering, delivery, and operations.",
     "highlights": [
-      "Defines architecture and technical implementation direction",
-      "Makes refactoring and technical-enabler decisions",
-      "Works across frontend, backend, and infrastructure",
-      "Coordinates with product owners, project managers, and engineers across locations",
-      "Owns technical concerns for both SaaS and on-premise operation",
-      "Uses AI-assisted workflows for code, prototypes, and documentation"
+      "Architecture leadership, technical standards, and implementation strategy for a business-critical product platform",
+      "Modern full-stack platform engineering with .NET, Angular, NestJS, Node.js, and PostgreSQL",
+      "Strategic refactoring and technical-enabler planning that balance product delivery with long-term maintainability",
+      "Frontend architecture and quality engineering with shared libraries, Storybook, Playwright end-to-end testing, and an Nx monorepo",
+      "Cloud and infrastructure delivery across Docker workloads, Terraform infrastructure as code, and Microsoft Azure services",
+      "Cross-functional technical leadership with product owners, project managers, and distributed engineering teams",
+      "Production architecture and operational readiness for both SaaS and on-premises deployment models",
+      "AI-augmented software development with Claude Code, Codex, Gemini, OpenCode, and agentic workflows for coding, prototyping, reviews, and documentation"
     ],
-    "tech": [".NET", "Angular", "Docker", "Kubernetes", "Azure", "AI tooling"],
+    "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "Playwright", "Storybook", "NestJS", "Docker", "Kubernetes", "Terraform", "Azure", "Claude Code", "Codex", "Gemini", "OpenCode", "Agentic workflows"],
     "featured": true
   },
   {

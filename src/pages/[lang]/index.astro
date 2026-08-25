@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import HomeSidebar from "../../components/HomeSidebar.astro";
 import AboutSection from "../../components/AboutSection.astro";
 import ProjectsGrid from "../../components/ProjectsGrid.astro";
+import TechPill from "../../components/TechPill.astro";
 import { getContent } from "../../lib/content";
 import { locales, formatPeriod } from "../../lib/i18n";
 
@@ -58,7 +59,7 @@ const sortedExperience = [...content.experience].sort((a, b) => {
                   {item.highlights.map((highlight) => <li>{highlight}</li>)}
                 </ul>
                 <ul class="pill-list">
-                  {item.tech.map((tech) => <li class="pill">{tech}</li>)}
+                  {item.tech.map((tech) => <TechPill label={tech} />)}
                 </ul>
               </div>
             </article>

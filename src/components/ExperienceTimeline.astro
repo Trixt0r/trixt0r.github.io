@@ -1,6 +1,7 @@
 ---
 import { formatPeriod } from "../lib/i18n";
 import type { LocaleContent, Locale } from "../lib/types";
+import TechPill from "./TechPill.astro";
 
 interface Props {
   locale: Locale;
@@ -22,7 +23,7 @@ const { locale, content } = Astro.props;
           {item.highlights.map((highlight) => <li>{highlight}</li>)}
         </ul>
         <ul class="pill-list">
-          {item.tech.map((tech) => <li class="pill">{tech}</li>)}
+          {item.tech.map((tech) => <TechPill label={tech} />)}
         </ul>
       </article>
     ))}
