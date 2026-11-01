@@ -6,8 +6,7 @@ const site = import.meta.env.SITE;
 const basePath = import.meta.env.BASE_URL;
 
 const routes = [
-  { pathSuffix: "/", priority: "1.0", changefreq: "weekly" },
-  { pathSuffix: "/cv/", priority: "0.7", changefreq: "monthly" }
+  { pathSuffix: "/", priority: "1.0", changefreq: "weekly" }
 ];
 
 function toAbsoluteUrl(locale: (typeof locales)[number], pathSuffix: string) {

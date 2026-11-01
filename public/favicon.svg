@@ -1,22 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Heinrich Reich">
-  <defs>
-    <linearGradient id="bg" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#172554" />
-      <stop offset="0.52" stop-color="#0b1020" />
-      <stop offset="1" stop-color="#111827" />
-    </linearGradient>
-    <linearGradient id="accent" x1="14" y1="12" x2="52" y2="54" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#81a1ff" />
-      <stop offset="1" stop-color="#3f63f2" />
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#020617" flood-opacity="0.45" />
-    </filter>
-  </defs>
-  <rect width="64" height="64" rx="16" fill="url(#bg)" />
-  <circle cx="50" cy="14" r="18" fill="#81a1ff" opacity="0.18" />
-  <circle cx="13" cy="53" r="20" fill="#3f63f2" opacity="0.24" />
-  <rect x="9" y="9" width="46" height="46" rx="14" fill="#edf2ff" opacity="0.06" stroke="url(#accent)" stroke-width="2" />
-  <path d="M17 44V20h6v9h18v-9h6v24h-6v-9H23v9z" fill="#f8fbff" filter="url(#shadow)" />
-  <path d="M47 20v24h-6V20z" fill="#81a1ff" opacity="0.94" />
+  <rect x="2" y="2" width="60" height="60" rx="11" fill="#fafbfc" stroke="#176943" stroke-width="4" />
+  <path fill="#176943" d="M12 14h6v13c1.6-2.4 4-3.6 7-3.6 5.1 0 7.9 3.4 7.9 9V49h-6V33.8c0-3.1-1.3-4.7-3.8-4.7-3.1 0-5.1 2.3-5.1 5.7V49h-6V14Zm24 10h5.8v3.8c1.2-2.8 3.3-4.4 6.1-4.4.8 0 1.4.1 1.9.3v6.1a8.8 8.8 0 0 0-2.6-.4c-3.5 0-5.2 2.4-5.2 6.1V49h-6V24Z" />
+  <circle cx="53" cy="46" r="3.5" fill="#176943" />
 </svg>

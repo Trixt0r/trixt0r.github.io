@@ -9,7 +9,6 @@ interface Props {
 
 const { locale, content, basePath } = Astro.props;
 const { hero, profile, summary, labels, links } = content;
-const cvHref = `${basePath.replace(/\/$/, "")}/${locale}/cv/`;
 const mailHref = `mailto:${profile.email}`;
 ---
 
@@ -19,7 +18,6 @@ const mailHref = `mailto:${profile.email}`;
     <h1>{hero.headline}</h1>
     <p class="section-copy">{hero.subheadline}</p>
     <div class="cta-row">
-      <a class="button" href={cvHref}>{hero.primaryCtaLabel}</a>
       <a class="button-secondary" href={mailHref}>{hero.secondaryCtaLabel}</a>
       <a class="button-secondary" href={links.github} target="_blank" rel="noreferrer">GitHub</a>
       <a class="button-secondary" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>

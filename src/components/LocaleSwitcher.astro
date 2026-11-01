@@ -18,6 +18,7 @@ const base = basePath === "/" ? "" : basePath.replace(/\/$/, "");
   {locales.map((value) => (
     <a
       href={`${base}/${value}${cleanedSuffix === "/" ? "/" : cleanedSuffix}`}
+      target="_self"
       class:list={{ "control-group__item": true, "is-active": value === locale }}
       data-locale-link
       data-locale={value}

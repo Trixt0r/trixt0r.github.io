@@ -1,0 +1,28 @@
+---
+import type { Locale } from "../../lib/types";
+interface Props { locale: Locale }
+const descriptions = {
+  en: ["Application: the interface where requests begin.", "Services: application logic and clear boundaries.", "Events: asynchronous messages connect independent processes.", "Data: persistent state used by the services."],
+  de: ["Applikation: die Oberfläche, an der Anfragen beginnen.", "Services: Anwendungslogik mit klaren Grenzen.", "Events: asynchrone Nachrichten verbinden unabhängige Prozesse.", "Daten: persistenter Zustand für die Services."],
+  ru: ["Приложение: интерфейс, в котором начинаются запросы.", "Сервисы: прикладная логика и чёткие границы.", "События: асинхронные сообщения связывают независимые процессы.", "Данные: постоянное состояние для сервисов."]
+};
+const text = descriptions[Astro.props.locale];
+---
+<div class="architecture" aria-label="Software architecture diagram">
+  <div class="architecture__bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>system-architecture.svg</span><span class="architecture__bar-end">⌘ / 01</span></div>
+  <div class="architecture__canvas">
+    <div class="architecture__caption"><span>ARCHITECTURE / 001</span><span>◈ &nbsp; SYSTEM OVERVIEW</span></div>
+    <svg viewBox="0 0 540 320" role="img" aria-labelledby="diagram-title diagram-desc">
+      <title id="diagram-title">Application architecture</title>
+      <desc id="diagram-desc">An application sends requests to services. Services publish events and read and write persistent data.</desc>
+      <g class="diagram-lines" fill="none"><path d="M160 151H203"/><path d="M337 151H380"/><path d="M270 184V240H380"/><path d="M447 184V240"/></g>
+      <g class="diagram-signal"><circle r="3"><animateMotion dur="5s" repeatCount="indefinite" path="M160 151H203"/></circle><circle r="3"><animateMotion dur="6s" repeatCount="indefinite" path="M270 184V240H380"/></circle></g>
+      <g class="diagram-node" tabindex="0" aria-label={text[0]}><title>{text[0]}</title><rect x="26" y="118" width="134" height="66" rx="4"/><text x="42" y="143" class="diagram-node__small">01 / INTERFACE</text><text x="42" y="164">APPLICATION</text><circle cx="160" cy="151" r="3"/></g>
+      <g class="diagram-node diagram-node--active" tabindex="0" aria-label={text[1]}><title>{text[1]}</title><rect x="203" y="118" width="134" height="66" rx="4"/><text x="219" y="143" class="diagram-node__small">02 / LOGIC</text><text x="219" y="164">SERVICES</text><circle cx="203" cy="151" r="3"/><circle cx="337" cy="151" r="3"/></g>
+      <g class="diagram-node" tabindex="0" aria-label={text[2]}><title>{text[2]}</title><rect x="380" y="118" width="134" height="66" rx="4"/><text x="396" y="143" class="diagram-node__small">03 / MESSAGING</text><text x="396" y="164">EVENTS</text><circle cx="380" cy="151" r="3"/></g>
+      <g class="diagram-node" tabindex="0" aria-label={text[3]}><title>{text[3]}</title><rect x="380" y="207" width="134" height="66" rx="4"/><text x="396" y="232" class="diagram-node__small">04 / STORAGE</text><text x="396" y="253">DATA LAYER</text><circle cx="380" cy="240" r="3"/></g>
+      <text x="26" y="302" class="diagram-annotation">BOUNDARIES / CONNECTIONS / FLOW</text><text x="484" y="302" class="diagram-annotation">01—04</text>
+    </svg>
+  </div>
+  <div class="architecture__foot"><span><span class="status-dot"></span> SYSTEM MODEL</span><span>STATIC VIEW / LIVE SIGNALS</span></div>
+</div>

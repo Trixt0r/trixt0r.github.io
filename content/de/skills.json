@@ -13,7 +13,7 @@
     {
       "id": "data",
       "label": "Daten und Persistence",
-      "items": ["SQL Server", "MariaDB"]
+      "items": ["SQL Server", "MariaDB", "PostgreSQL", "Redis"]
     },
     {
       "id": "cloud",
@@ -23,7 +23,12 @@
     {
       "id": "delivery",
       "label": "Delivery und Zusammenarbeit",
-      "items": ["Azure DevOps", "CI/CD", "Code Reviews", "Jira", "Confluence"]
+      "items": ["Azure DevOps", "GitHub", "CI/CD", "Code Reviews", "Jira", "Confluence"]
+    },
+    {
+      "id": "ai",
+      "label": "KI-Werkzeuge und agentische Entwicklung",
+      "items": ["Claude", "ChatGPT (Codex)", "Gemini", "OpenCode", "Spec-driven development", "Software factories"]
     }
   ]
 }

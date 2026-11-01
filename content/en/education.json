@@ -2,12 +2,14 @@
   "items": [
     {
       "institution": "University of Bern",
+      "location": "Bern",
       "degree": "Computer science studies",
       "period": "2010 - 2014",
       "summary": "Completed the computer science portion including a bachelor thesis on deferred rendering with Java and OpenGL. Secondary subjects were not continued after moving into industry full-time."
     },
     {
-      "institution": "Richard von Weizsacker Berufskolleg, Dulmen",
+      "institution": "Richard von Weizsacker Berufskolleg",
+      "location": "Dülmen",
       "degree": "General higher education entrance qualification",
       "period": "2007 - 2010",
       "summary": "Focus on mathematics and computer science."

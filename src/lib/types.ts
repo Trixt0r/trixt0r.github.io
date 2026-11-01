@@ -20,6 +20,7 @@ export interface Summary {
   currentRoleLabel: string;
   focusAreas: string[];
   blurb: string;
+  about: string[];
 }
 
 export interface ImpactItem {
@@ -79,6 +80,7 @@ export interface Languages {
 
 export interface EducationItem {
   institution: string;
+  location: string;
   degree: string;
   period: string;
   summary: string;

@@ -1,0 +1,16 @@
+---
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+---
+<svg class="skill-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  {category === "frontend" ? <><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18M7 6.5h.01M10 6.5h.01"></path></> :
+   category === "backend" ? <><rect x="3" y="3" width="18" height="7" rx="2"></rect><rect x="3" y="14" width="18" height="7" rx="2"></rect><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"></path></> :
+   category === "data" ? <><ellipse cx="12" cy="5" rx="8" ry="3"></ellipse><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"></path></> :
+   category === "cloud" ? <path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 10a4 4 0 0 1 0 8H7Z"></path> :
+   category === "delivery" ? <><circle cx="6" cy="6" r="2"></circle><circle cx="18" cy="6" r="2"></circle><circle cx="12" cy="18" r="2"></circle><path d="M6 8v2a6 6 0 0 0 6 6M18 8v2a6 6 0 0 1-6 6"></path></> :
+   category === "ai" ? <><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"></path></> :
+   <><path d="M3 5h11M8 2v3M5 8c1.5 2.5 3.5 4.5 6 6M12 5c-1 4-3.5 7-8 9M13 22l4-10 4 10M14.2 19h5.6"></path></>}
+</svg>

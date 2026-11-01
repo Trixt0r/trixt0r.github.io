@@ -32,7 +32,8 @@ export function normalizeLocale(input: string | undefined): Locale {
 export function formatPeriod(start: string, end: string | null, locale: Locale, todayLabel: string) {
   const formatter = new Intl.DateTimeFormat(locale, {
     month: "short",
-    year: "numeric"
+    year: "numeric",
+    timeZone: "UTC"
   });
 
   const startValue = formatter.format(new Date(`${start}-01`));

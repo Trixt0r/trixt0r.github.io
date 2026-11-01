@@ -22,8 +22,8 @@ const socialImage = new URL(assetPath('favicon-512.png'), site).toString();
     <meta name='description' content={description} />
     <meta name='author' content={content.profile.name} />
     <meta name='robots' content='noindex, nofollow' />
-    <meta name='theme-color' content='#f3f4f8' media='(prefers-color-scheme: light)' />
-    <meta name='theme-color' content='#0b1020' media='(prefers-color-scheme: dark)' />
+    <meta name='theme-color' content='#f6f3eb' media='(prefers-color-scheme: light)' />
+    <meta name='theme-color' content='#0d1117' media='(prefers-color-scheme: dark)' />
     <link rel='canonical' href={canonical} />
     <link rel='icon' href={assetPath('favicon.svg')} type='image/svg+xml' />
     <link rel='alternate icon' href={assetPath('favicon.ico')} sizes='any' />
@@ -45,10 +45,7 @@ const socialImage = new URL(assetPath('favicon-512.png'), site).toString();
     <meta name='twitter:description' content={description} />
     <meta name='twitter:image' content={socialImage} />
     <meta name='twitter:image:alt' content='Heinrich Reich portfolio preview' />
-    <script is:inline>
-      const basePath = {JSON.stringify(basePath)};
-      const fallback = {JSON.stringify(defaultLocale)};
-      const supportedLocales = {JSON.stringify(locales)};
+    <script define:vars={{ basePath, fallback: defaultLocale, supportedLocales: locales }}>
       const savedLocale = localStorage.getItem('preferred-locale');
       const browserLocales = navigator.languages ?? [navigator.language ?? fallback];
       const candidates = [savedLocale, ...browserLocales].filter(Boolean);

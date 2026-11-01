@@ -32,9 +32,10 @@ import { icons as deviconIcons } from "@iconify-json/devicon-plain";
 
 interface Props {
   label: string;
+  iconOnly?: boolean;
 }
 
-const { label } = Astro.props;
+const { label, iconOnly = false } = Astro.props;
 
 // Devicon's plain Java mark; rendered with currentColor like the Simple Icons marks.
 const javaIcon = {
@@ -82,7 +83,7 @@ const cloudLabels = new Set(["AWS", "Azure", "Azure DevOps"]);
 const terminalLabels = new Set(["Agentic workflows", "Agentic Workflows", "Codex", "Editor tooling", "Runtime"]);
 ---
 
-<li class="pill tech-pill">
+<li class:list={["pill", "tech-pill", { "tech-pill--icon-only": iconOnly }]} title={iconOnly ? label : undefined}>
   {icon ? (
     <svg class="tech-pill__icon" viewBox={iconViewBox} aria-hidden="true">
       {"body" in icon ? <Fragment set:html={icon.body} /> : <path d={icon.path}></path>}
@@ -104,5 +105,5 @@ const terminalLabels = new Set(["Agentic workflows", "Agentic Workflows", "Codex
       <path d="m8.6 6-6 6 6 6 1.6-1.7L5.9 12l4.3-4.3L8.6 6Zm6.8 0-1.6 1.7 4.3 4.3-4.3 4.3 1.6 1.7 6-6-6-6Z"></path>
     </svg>
   )}
-  <span>{label}</span>
+  <span class:list={{ "sr-only": iconOnly }}>{label}</span>
 </li>
