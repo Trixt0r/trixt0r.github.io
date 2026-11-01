@@ -20,7 +20,6 @@ const description = content.seo.description;
 const baseUrl = import.meta.env.SITE;
 const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const siteName = `${content.profile.name} Portfolio`;
-const keywords = content.seo.keywords?.join(", ");
 const localeCodes: Record<Locale, string> = {
   de: "de_CH",
   en: "en_US",
@@ -31,26 +30,51 @@ const alternateLinks = locales.map((currentLocale) => ({
   href: new URL(buildPath(import.meta.env.BASE_URL, currentLocale, pathSuffix), baseUrl).toString()
 }));
 const canonical = alternateLinks.find((entry) => entry.locale === locale)?.href ?? new URL(Astro.url.pathname, baseUrl).toString();
-const socialImage = new URL(assetPath("favicon-512.png"), baseUrl).toString();
-const socialImageAlt = `${content.profile.name} portfolio preview`;
+const siteRoot = new URL(import.meta.env.BASE_URL, baseUrl).toString();
+const personId = `${siteRoot}#person`;
+const profileImage = new URL(assetPath("profile-avatar.jpg"), baseUrl).toString();
+const socialImage = new URL(assetPath("og-image.png"), baseUrl).toString();
+const socialImageAlt = `${content.profile.name} – ${content.summary.currentRoleLabel}, ${content.profile.location}`;
 const profileUrl = new URL(buildPath(import.meta.env.BASE_URL, locale), baseUrl).toString();
+const addressLocality = content.profile.location.split(",")[0].trim();
+const knowsAbout = [...new Set(content.skills.groups.flatMap((group) => group.items))];
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: content.profile.name,
-  jobTitle: content.profile.title,
+  "@type": "ProfilePage",
+  "@id": canonical,
+  url: canonical,
+  name: title,
   description,
-  url: profileUrl,
-  image: socialImage,
-  email: `mailto:${content.profile.email}`,
-  telephone: content.profile.phone,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: content.profile.location,
-    addressCountry: "CH"
-  },
-  sameAs: [content.links.github, content.links.linkedin],
-  knowsLanguage: content.languages.items.map((item) => item.name)
+  inLanguage: locale,
+  dateModified: content.seo.updatedAt,
+  mainEntity: {
+    "@type": "Person",
+    "@id": personId,
+    name: content.profile.name,
+    alternateName: "Trixt0r",
+    jobTitle: content.summary.currentRoleLabel,
+    description: content.summary.blurb,
+    url: profileUrl,
+    image: profileImage,
+    email: `mailto:${content.profile.email}`,
+    telephone: content.profile.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality,
+      addressCountry: "CH"
+    },
+    worksFor: {
+      "@type": "Organization",
+      name: "zeit ag"
+    },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Universität Bern"
+    },
+    knowsAbout,
+    knowsLanguage: content.languages.items.map((item) => item.name),
+    sameAs: [content.links.linkedin, content.links.github, "https://www.npmjs.com/~trixt0r"]
+  }
 };
 ---
 
@@ -74,7 +98,6 @@ const structuredData = {
     <meta name="description" content={description} />
     <meta name="author" content={content.profile.name} />
     <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
-    {keywords && <meta name="keywords" content={keywords} />}
     <meta name="theme-color" content="#f6f3eb" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonical} />
@@ -94,8 +117,8 @@ const structuredData = {
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:secure_url" content={socialImage} />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="512" />
-    <meta property="og:image:height" content="512" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={socialImageAlt} />
     <meta property="og:locale" content={localeCodes[locale]} />
     {alternateLinks.filter((entry) => entry.locale !== locale).map((entry) => (

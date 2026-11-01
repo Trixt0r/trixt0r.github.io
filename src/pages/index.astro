@@ -10,18 +10,18 @@ const site = import.meta.env.SITE;
 const title = content.seo.title;
 const description = content.seo.description;
 const canonical = new URL(fallback, site).toString();
-const socialImage = new URL(assetPath('favicon-512.png'), site).toString();
+const socialImage = new URL(assetPath('og-image.png'), site).toString();
+const socialImageAlt = `${content.profile.name} – ${content.summary.currentRoleLabel}, ${content.profile.location}`;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='de'>
   <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <title>{title}</title>
     <meta name='description' content={description} />
     <meta name='author' content={content.profile.name} />
-    <meta name='robots' content='noindex, nofollow' />
     <meta name='theme-color' content='#f6f3eb' media='(prefers-color-scheme: light)' />
     <meta name='theme-color' content='#0d1117' media='(prefers-color-scheme: dark)' />
     <link rel='canonical' href={canonical} />
@@ -37,14 +37,14 @@ const socialImage = new URL(assetPath('favicon-512.png'), site).toString();
     <meta property='og:image' content={socialImage} />
     <meta property='og:image:secure_url' content={socialImage} />
     <meta property='og:image:type' content='image/png' />
-    <meta property='og:image:width' content='512' />
-    <meta property='og:image:height' content='512' />
-    <meta property='og:image:alt' content='Heinrich Reich portfolio preview' />
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='630' />
+    <meta property='og:image:alt' content={socialImageAlt} />
     <meta name='twitter:card' content='summary_large_image' />
     <meta name='twitter:title' content={title} />
     <meta name='twitter:description' content={description} />
     <meta name='twitter:image' content={socialImage} />
-    <meta name='twitter:image:alt' content='Heinrich Reich portfolio preview' />
+    <meta name='twitter:image:alt' content={socialImageAlt} />
     <script define:vars={{ basePath, fallback: defaultLocale, supportedLocales: locales }}>
       const savedLocale = localStorage.getItem('preferred-locale');
       const browserLocales = navigator.languages ?? [navigator.language ?? fallback];
@@ -64,5 +64,9 @@ const socialImage = new URL(assetPath('favicon-512.png'), site).toString();
     </script>
     <meta http-equiv='refresh' content={`0;url=${fallback}`} />
   </head>
-  <body></body>
+  <body>
+    <noscript>
+      <p><a href={fallback}>Weiter zur deutschen Version</a></p>
+    </noscript>
+  </body>
 </html>

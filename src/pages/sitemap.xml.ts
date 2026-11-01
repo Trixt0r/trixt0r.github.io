@@ -1,12 +1,13 @@
 import type { APIRoute } from "astro";
 
+import { getContent } from "../lib/content";
 import { defaultLocale, buildPath, locales } from "../lib/i18n";
 
 const site = import.meta.env.SITE;
 const basePath = import.meta.env.BASE_URL;
 
 const routes = [
-  { pathSuffix: "/", priority: "1.0", changefreq: "weekly" }
+  { pathSuffix: "/" }
 ];
 
 function toAbsoluteUrl(locale: (typeof locales)[number], pathSuffix: string) {
@@ -17,6 +18,7 @@ export const GET: APIRoute = () => {
   const items = routes.flatMap((route) =>
     locales.map((locale) => {
       const url = toAbsoluteUrl(locale, route.pathSuffix);
+      const lastmod = getContent(locale).seo.updatedAt;
       const alternates = locales
         .map((alternateLocale) => {
           const href = toAbsoluteUrl(alternateLocale, route.pathSuffix);
@@ -24,7 +26,7 @@ export const GET: APIRoute = () => {
         })
         .join("");
 
-      return `<url><loc>${url}</loc><changefreq>${route.changefreq}</changefreq><priority>${route.priority}</priority>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${toAbsoluteUrl(defaultLocale, route.pathSuffix)}" /></url>`;
+      return `<url><loc>${url}</loc><lastmod>${lastmod}</lastmod>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${toAbsoluteUrl(defaultLocale, route.pathSuffix)}" /></url>`;
     })
   );
 
