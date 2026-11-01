@@ -44,8 +44,10 @@ const javaIcon = {
 
 const icons = {
   ".NET": siDotnet,
-  "ASP.NET": siDotnet,
-  "C#": siDotnet,
+  "ASP.NET": {
+    body: '<rect x="1" y="3" width="22" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="12" y="11" fill="currentColor" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="700">ASP</text><text x="12" y="18" fill="currentColor" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" font-weight="700">.NET</text>',
+  },
+  "C#": deviconIcons.icons.csharp,
   Android: siAndroid,
   Angular: siAngular,
   "Apache Cordova": siApachecordova,
@@ -78,7 +80,7 @@ const icons = {
 } as const;
 
 const icon = icons[label as keyof typeof icons];
-const iconViewBox = label === "Java" || label === "SQL Server" ? "0 0 128 128" : "0 0 24 24";
+const iconViewBox = label === "Java" || label === "SQL Server" || label === "C#" ? "0 0 128 128" : "0 0 24 24";
 const cloudLabels = new Set(["AWS", "Azure", "Azure DevOps"]);
 const terminalLabels = new Set(["Agentic workflows", "Agentic Workflows", "Codex", "Editor tooling", "Runtime"]);
 ---
