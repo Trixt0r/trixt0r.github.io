@@ -1,7 +1,7 @@
 # SEO notes
 
 ## How the site is wired
-- Static Astro build on GitHub Pages. Canonical, hreflang (head) and the sitemap all derive from `getSiteRoutes()` in
+- Static Astro build on GitHub Pages. Canonical, hreflang (head) and the sitemap (plain URLs + lastmod, no xhtml alternates) all derive from `getSiteRoutes()` in
   `src/lib/seo.ts`, so they cannot drift apart. `npm test` verifies this against the built HTML.
 - Indexable pages: homepage in `de` (`/`), `en`, `ru`, `fr`, `it`; project pages for ECSTS, Y.A.M.E. and the Spriter runtime in `de` and `en`.
 - Not indexable by design: `/de/` (redirect stub), `/404.html` (`noindex`).
