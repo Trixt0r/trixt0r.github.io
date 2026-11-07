@@ -1,4 +1,4 @@
-export type Locale = "de" | "en" | "ru";
+export type Locale = "de" | "en" | "ru" | "fr" | "it";
 
 export interface Profile {
   name: string;
@@ -44,6 +44,8 @@ export interface ExperienceItem {
   highlights: string[];
   tech: string[];
   featured: boolean;
+  /** Public sources for claims in this entry (e.g. an employer's own announcement). */
+  references?: { label: string; url: string }[];
 }
 
 export interface ProjectItem {
@@ -172,7 +174,44 @@ export interface Labels {
   locationLabel: string;
 }
 
+/** Interface strings for the homepage, project pages and the language suggestion. */
+export interface Ui {
+  nav: string;
+  skip: string;
+  about: string;
+  skills: string;
+  projects: string;
+  career: string;
+  careerNav: string;
+  careerNote: string;
+  focus: string;
+  location: string;
+  languages: string;
+  profile: string;
+  present: string;
+  allProjects: string;
+  details: string;
+  references: string;
+  repository: string;
+  projectDetails: string;
+  /** Lead-in for links to English project pages (empty where the language has its own pages). */
+  englishDetails: string;
+  /** Note shown below the languages list when the site text is a translation. */
+  translationNote: string;
+  backToSection: string;
+  backToTop: string;
+  breadcrumb: string;
+  status: string;
+  period: string;
+  tech: string;
+  links: string;
+  back: string;
+  repositoryOnGithub: string;
+  suggestion: { message: string; action: string; dismiss: string };
+}
+
 export interface LocaleContent {
+  ui: Ui;
   profile: Profile;
   hero: Hero;
   summary: Summary;

@@ -1,5 +1,5 @@
 import { getContent } from "./content";
-import { buildPath, defaultLocale, locales } from "./i18n";
+import { buildPath, fallbackLocale, locales } from "./i18n";
 import type { Locale, LocaleContent } from "./types";
 
 const site = import.meta.env.SITE;
@@ -22,6 +22,23 @@ export function assetUrl(path: string) {
 
 /** Stable across languages: the person entity is defined once, relative to the site root. */
 export const personId = `${new URL(basePath, site).toString()}#person`;
+/** Stable website entity shared by every page; its URL is the default-language root. */
+export const websiteId = `${new URL(basePath, site).toString()}#website`;
+
+function websiteNode(content: LocaleContent, locale: Locale) {
+  return {
+    "@type": "WebSite",
+    "@id": websiteId,
+    url: new URL(basePath, site).toString(),
+    name: `${content.profile.name} Portfolio`,
+    inLanguage: locales
+  };
+}
+
+/** Public profiles that belong to the person, verified to exist. */
+export function sameAsLinks(content: LocaleContent) {
+  return [content.links.linkedin, content.links.github, "https://www.npmjs.com/~trixt0r"];
+}
 
 /** Locales in which a project page with this id exists. */
 export function projectPageLocales(id: string): Locale[] {
@@ -51,10 +68,10 @@ export function getSiteRoutes(): SiteRoute[] {
   ];
 }
 
-/** Absolute hreflang targets for a page: only real translations, plus x-default. */
+/** Absolute hreflang targets for a page: only real translations, plus x-default (English where available). */
 export function alternatesFor(suffix: string, available: Locale[] = locales) {
   const entries = available.map((locale) => ({ locale, href: absoluteUrl(locale, suffix) }));
-  const xDefaultLocale = available.includes(defaultLocale) ? defaultLocale : available[0];
+  const xDefaultLocale = available.includes(fallbackLocale) ? fallbackLocale : available[0];
   return { entries, xDefault: absoluteUrl(xDefaultLocale, suffix) };
 }
 
@@ -66,31 +83,39 @@ export function buildProfileStructuredData(locale: Locale, content: LocaleConten
   const addressLocality = content.profile.location.split(",")[0].trim();
   return {
     "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "@id": canonical,
-    url: canonical,
-    name: content.seo.title,
-    description: content.seo.description,
-    inLanguage: locale,
-    dateModified: content.seo.updatedAt,
-    mainEntity: {
-      "@type": "Person",
-      "@id": personId,
-      name: content.profile.name,
-      alternateName: "Trixt0r",
-      jobTitle: content.summary.currentRoleLabel,
-      description: content.summary.blurb,
-      url: canonical,
-      image: assetUrl("profile-avatar.jpg"),
-      email: `mailto:${content.profile.email}`,
-      telephone: content.profile.phone,
-      address: { "@type": "PostalAddress", addressLocality, addressCountry: "CH" },
-      ...(currentRole ? { worksFor: { "@type": "Organization", name: currentRole.company } } : {}),
-      ...(school ? { alumniOf: { "@type": "CollegeOrUniversity", name: school.institution } } : {}),
-      knowsAbout: [...new Set(content.skills.groups.flatMap((group) => group.items))],
-      knowsLanguage: content.languages.items.map((item) => item.name),
-      sameAs: [content.links.linkedin, content.links.github, "https://www.npmjs.com/~trixt0r"]
-    }
+    "@graph": [
+      websiteNode(content, locale),
+      {
+        "@type": "ProfilePage",
+        "@id": canonical,
+        url: canonical,
+        name: content.seo.title,
+        description: content.seo.description,
+        inLanguage: locale,
+        dateModified: content.seo.updatedAt,
+        isPartOf: { "@id": websiteId },
+        mainEntity: {
+          "@type": "Person",
+          "@id": personId,
+          name: content.profile.name,
+          alternateName: "Trixt0r",
+          jobTitle: content.summary.currentRoleLabel,
+          description: content.summary.blurb,
+          url: canonical,
+          mainEntityOfPage: { "@id": canonical },
+          image: assetUrl("profile-avatar.jpg"),
+          email: `mailto:${content.profile.email}`,
+          telephone: content.profile.phone,
+          address: { "@type": "PostalAddress", addressLocality, addressCountry: "CH" },
+          ...(currentRole ? { worksFor: { "@type": "Organization", name: currentRole.company } } : {}),
+          ...(school ? { alumniOf: { "@type": "CollegeOrUniversity", name: school.institution } } : {}),
+          knowsAbout: [...new Set(content.skills.groups.flatMap((group) => group.items))],
+          // Language codes, not localized names, so the value is identical on every translation.
+          knowsLanguage: ["de", "ru", "en"],
+          sameAs: sameAsLinks(content)
+        }
+      }
+    ]
   };
 }
 
@@ -107,6 +132,7 @@ export function buildProjectStructuredData(locale: Locale, content: LocaleConten
   return {
     "@context": "https://schema.org",
     "@graph": [
+      websiteNode(content, locale),
       {
         "@type": "WebPage",
         "@id": canonical,
@@ -115,8 +141,9 @@ export function buildProjectStructuredData(locale: Locale, content: LocaleConten
         description: page.description,
         inLanguage: locale,
         dateModified: page.updatedAt,
-        isPartOf: { "@type": "WebSite", url: home, name: `${content.profile.name} Portfolio` },
+        isPartOf: { "@id": websiteId },
         about: { "@id": `${canonical}#software` },
+        author: { "@id": personId },
         breadcrumb: { "@id": `${canonical}#breadcrumb` }
       },
       {

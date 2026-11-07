@@ -19,11 +19,7 @@ const page = findProjectPage(locale, id)!;
 const project = content.projects.find((item) => item.id === id)!;
 const basePath = import.meta.env.BASE_URL;
 const home = localePath(locale);
-const copy = {
-  de: { skip: "Zum Inhalt springen", nav: "Hauptnavigation", profile: "Profil", projects: "Projekte", breadcrumb: "Brotkrümel-Navigation", status: "Status", period: "Zeitraum", tech: "Technologien", links: "Links und Quellen", back: "Zurück zum Profil", repository: "Repository auf GitHub" },
-  en: { skip: "Skip to content", nav: "Main navigation", profile: "Profile", projects: "Projects", breadcrumb: "Breadcrumb", status: "Status", period: "Period", tech: "Technologies", links: "Links and sources", back: "Back to profile", repository: "Repository on GitHub" },
-  ru: { skip: "К содержанию", nav: "Основная навигация", profile: "Профиль", projects: "Проекты", breadcrumb: "Навигационная цепочка", status: "Статус", period: "Период", tech: "Технологии", links: "Ссылки и источники", back: "Назад к профилю", repository: "Репозиторий на GitHub" }
-}[locale];
+const copy = content.ui;
 const suffix = projectSuffix(id);
 ---
 <BaseLayout
@@ -44,7 +40,7 @@ const suffix = projectSuffix(id);
           <a href={home}>{copy.profile}</a>
           <a href={`${home}#projects`}>{copy.projects}</a>
         </nav>
-        <div class="header-controls"><LocaleSwitcher locale={locale} labels={content.labels} basePath={basePath} pathSuffix={suffix} available={projectPageLocales(id)} /><ThemeToggle labels={content.labels} /></div>
+        <div class="header-controls"><ThemeToggle labels={content.labels} /></div>
       </div>
     </header>
     <main id="main" class="portfolio-container project-page">
@@ -59,6 +55,7 @@ const suffix = projectSuffix(id);
         <header class="project-hero">
           <h1>{page.heading}</h1>
           <p class="project-lead">{page.lead}</p>
+          <p class="project-byline"><a href={home}>{content.profile.name}</a> · {content.summary.currentRoleLabel}, {content.profile.location}</p>
           <dl class="project-facts">
             <div><dt>{copy.status}</dt><dd>{page.status}</dd></div>
             <div><dt>{copy.period}</dt><dd>{page.period}</dd></div>
@@ -80,6 +77,6 @@ const suffix = projectSuffix(id);
       </article>
       <p class="project-back"><a href={`${home}#projects`}>← {copy.back}</a></p>
     </main>
-    <footer class="portfolio-footer"><div class="portfolio-container footer-inner"><span>© {new Date().getFullYear()} {content.profile.name}</span><a href="#top">↑ {content.profile.name}</a></div></footer>
+    <footer class="portfolio-footer"><div class="portfolio-container footer-inner"><a class="footer-top" href="#top" title={copy.backToTop}>© {new Date().getFullYear()} {content.profile.name}</a><LocaleSwitcher locale={locale} labels={content.labels} basePath={basePath} pathSuffix={suffix} available={projectPageLocales(id)} /></div></footer>
   </div>
 </BaseLayout>

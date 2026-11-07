@@ -1,0 +1,16 @@
+{
+  "yearsExperienceLabel": "10+ anni di esperienza",
+  "currentRoleLabel": "Architetto software",
+  "focusAreas": [
+    "Architettura e direzione tecnica",
+    "Sviluppo di prodotto full-stack",
+    "Piattaforme SaaS e on-premise",
+    "Cloud, container e delivery"
+  ],
+  "blurb": "Sono un senior software engineer e architetto con esperienza nella realizzazione di sistemi in produzione per e-commerce, piattaforme per eventi e software aziendale. Unisco il pensiero architetturale allo sviluppo pratico e al refactoring.",
+  "about": [
+    "Che si tratti di sistemi SaaS o on-premise, do importanza a un’architettura chiara, a buone prestazioni e alla manutenibilità, sostenute da monitoraggio e automazione.",
+    "Mi piace lavorare in team agili, discutere le decisioni tecniche e mettere in discussione gli approcci esistenti per trovare soluzioni sostenibili ed efficienti. Autonomia, affidabilità e apprendimento continuo sono importanti per me, e collaboro sia con profili tecnici sia con responsabili di prodotto. Da Lucerna lavoro con team in Svizzera e in Europa, in sede o da remoto.",
+    "Utilizzo strumenti di IA, tra cui modelli linguistici di grandi dimensioni, a supporto di sviluppo, prototipazione, code review e documentazione, adattando il mio approccio allo strumento e al compito."
+  ]
+}

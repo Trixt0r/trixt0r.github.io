@@ -6,19 +6,48 @@
     "location": "Sursee",
     "start": "2023-12",
     "end": null,
-    "summary": "Architekturverantwortung f\u00fcr eine modulare Business-Plattform, verbunden mit strategischer technischer Ausrichtung und hands-on Produktentwicklung, Delivery und Betrieb.",
+    "summary": "Architekturverantwortung für eine modulare Business-Plattform, verbunden mit strategischer technischer Ausrichtung und hands-on Produktentwicklung, Delivery und Betrieb.",
     "highlights": [
-      "Architekturleitung, technische Standards und Umsetzungsstrategie f\u00fcr eine gesch\u00e4ftskritische Produktplattform",
+      "Architekturleitung, technische Standards und Umsetzungsstrategie für eine geschäftskritische Produktplattform",
+      "Öffentlich genannt: Die zeit ag nennt Heinrich Reich und Simon Bled als die beiden Entwickler, die SmartCapacity, ihr KI-gestütztes Produkt zur Personaleinsatzplanung, umgesetzt haben",
       "Moderne Full-Stack-Plattformentwicklung mit .NET, Angular, NestJS, Node.js und PostgreSQL",
       "Strategische Refactorings und Technical-Enabler-Planung im Spannungsfeld von Delivery und langfristiger Wartbarkeit",
       "Frontend-Architektur und Quality Engineering mit Shared Libraries, Storybook, Playwright-End-to-End-Tests und Nx-Monorepo",
       "Cloud- und Infrastructure-Delivery mit Docker-Workloads, Terraform Infrastructure as Code und Microsoft Azure Services",
-      "Technische F\u00fchrung in der Zusammenarbeit mit Product Owners, Project Managers und verteilten Engineering-Teams",
-      "Produktionsarchitektur und Operational Readiness f\u00fcr SaaS- und On-Premise-Betriebsmodelle",
-      "AI-augmented Software Development mit Claude Code, Codex, Gemini, OpenCode und agentischen Workflows f\u00fcr Coding, Prototyping, Reviews und Dokumentation"
+      "Technische Führung in der Zusammenarbeit mit Product Owners, Project Managers und verteilten Engineering-Teams",
+      "Produktionsarchitektur und Operational Readiness für SaaS- und On-Premise-Betriebsmodelle",
+      "AI-augmented Software Development mit Claude Code, Codex, Gemini, OpenCode und agentischen Workflows für Coding, Prototyping, Reviews und Dokumentation"
     ],
-    "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "Playwright", "Storybook", "NestJS", "Docker", "Kubernetes", "Terraform", "Azure", "Claude Code", "Codex", "Gemini", "OpenCode", "Agentic Workflows"],
-    "featured": true
+    "tech": [
+      ".NET",
+      "Angular",
+      "PostgreSQL",
+      "Node.js",
+      "Nx",
+      "Playwright",
+      "Storybook",
+      "NestJS",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Azure",
+      "Claude Code",
+      "Codex",
+      "Gemini",
+      "OpenCode",
+      "Agentic Workflows"
+    ],
+    "featured": true,
+    "references": [
+      {
+        "label": "zeit ag auf LinkedIn: SmartCapacity hinter den Kulissen (Deutsch)",
+        "url": "https://de.linkedin.com/posts/zeit-ag_smartcapacity-softwaredevelopment-ai-activity-7495385251817525248-7K84"
+      },
+      {
+        "label": "SmartCapacity: Produktseite der zeit ag (Deutsch)",
+        "url": "https://zeitag.ch/smartcapacity-ki-personaleinsatzplanung"
+      }
+    ]
   },
   {
     "id": "zeit-engineer",
@@ -29,11 +58,19 @@
     "end": "2023-11",
     "summary": "Migration zentraler Funktionen einer bestehenden Business-Software vom Windows Fat Client ins Web.",
     "highlights": [
-      "Web-Migration f\u00fcr Zeiterfassung, Projektmanagement und Personaleinsatzplanung",
-      "Produktunterst\u00fctzung f\u00fcr SaaS- und On-Premise-Kunden",
+      "Web-Migration für Zeiterfassung, Projektmanagement und Personaleinsatzplanung",
+      "Produktunterstützung für SaaS- und On-Premise-Kunden",
       "Arbeit in Cloud- und Container-Umgebungen mit CI/CD und Code-Review-Prozessen"
     ],
-    "tech": ["SQL Server", "C#", "ASP.NET", "Angular", "Docker", "Kubernetes", "Azure DevOps"],
+    "tech": [
+      "SQL Server",
+      "C#",
+      "ASP.NET",
+      "Angular",
+      "Docker",
+      "Kubernetes",
+      "Azure DevOps"
+    ],
     "featured": true
   },
   {
@@ -43,13 +80,21 @@
     "location": "Thun",
     "start": "2014-04",
     "end": "2021-04",
-    "summary": "Arbeit an kundenrelevanten Produkten f\u00fcr die Schweizerische Post mit Fokus auf langfristige Wartbarkeit und Integration in bestehende Prozesse.",
+    "summary": "Arbeit an kundenrelevanten Produkten für die Schweizerische Post mit Fokus auf langfristige Wartbarkeit und Integration in bestehende Prozesse.",
     "highlights": [
       "Redesign, Refactoring und Wartung von WebStamp",
-      "Umsetzung einer mobilen und barrierearmen Zolldeklarationsl\u00f6sung",
+      "Umsetzung einer mobilen und barrierearmen Zolldeklarationslösung",
       "Arbeit in produktiven PHP- und JavaScript-Stacks mit MariaDB und Linux-Betrieb"
     ],
-    "tech": ["CentOS", "MariaDB", "PHP", "Zend Framework", "JavaScript", "Aurelia", "Vue"],
+    "tech": [
+      "CentOS",
+      "MariaDB",
+      "PHP",
+      "Zend Framework",
+      "JavaScript",
+      "Aurelia",
+      "Vue"
+    ],
     "featured": true
   },
   {
@@ -61,12 +106,21 @@
     "end": "2021-04",
     "summary": "Implementierung und Weiterentwicklung einer modularen Event-Plattform inklusive mobiler Begleitapplikationen.",
     "highlights": [
-      "Reservations- und Verkaufsplattform f\u00fcr Konzerte, Kongresse, Clubs und Shows",
-      "Kundenspezifische Module f\u00fcr individuelle Event-Anforderungen",
-      "Mobile Einlass- und POS-App mit Ger\u00e4te-APIs wie Kamera, GPS und NFC",
-      "Interner Appservice f\u00fcr weitere NextEvent-Applikationen"
+      "Reservations- und Verkaufsplattform für Konzerte, Kongresse, Clubs und Shows",
+      "Kundenspezifische Module für individuelle Event-Anforderungen",
+      "Mobile Einlass- und POS-App mit Geräte-APIs wie Kamera, GPS und NFC",
+      "Interner Appservice für weitere NextEvent-Applikationen"
     ],
-    "tech": ["PHP", "Node.js", "Express", "Backbone.js", "Zend Framework", "AWS", "Java", "Cordova"],
+    "tech": [
+      "PHP",
+      "Node.js",
+      "Express",
+      "Backbone.js",
+      "Zend Framework",
+      "AWS",
+      "Java",
+      "Cordova"
+    ],
     "featured": true
   }
 ]

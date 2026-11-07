@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "institution": "Università di Berna",
+      "location": "Berna",
+      "degree": "Studi di informatica",
+      "period": "2010 - 2014",
+      "summary": "La parte di informatica, compresa la tesi di bachelor sul deferred rendering con Java e OpenGL, è stata completata. Le materie complementari non sono state proseguite con l’ingresso a tempo pieno nel mondo del lavoro."
+    },
+    {
+      "institution": "Richard von Weizsacker Berufskolleg",
+      "location": "Dülmen",
+      "degree": "Maturità generale per l’accesso all’università (Allgemeine Hochschulreife)",
+      "period": "2007 - 2010",
+      "summary": "Indirizzo in matematica e informatica."
+    }
+  ]
+}

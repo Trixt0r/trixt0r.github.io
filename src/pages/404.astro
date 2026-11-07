@@ -1,0 +1,40 @@
+---
+// GitHub Pages serves this file with HTTP 404 for every unknown URL, so missing pages are real not-founds.
+import "../styles/site.css";
+import "../styles/portfolio.css";
+import { getContent } from "../lib/content";
+import { localeNames, locales } from "../lib/i18n";
+import { localePath } from "../lib/seo";
+
+const basePath = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (() => {
+        let saved;
+        try { saved = localStorage.getItem("preferred-theme"); } catch {}
+        document.documentElement.setAttribute("data-theme", saved === "light" || saved === "dark" ? saved : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+      })();
+    </script>
+    <title>404 – Page not found | Heinrich Reich</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href={`${basePath}favicon.svg`} type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="portfolio">
+      <main class="portfolio-container error-page">
+        <h1>404 – Page not found</h1>
+        <p>This page does not exist. The portfolio of Heinrich Reich is available in:</p>
+        <ul>
+          {locales.map((locale) => (
+            <li><a href={localePath(locale)} lang={locale} hreflang={locale}>{localeNames[locale]} – {getContent(locale).seo.title}</a></li>
+          ))}
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

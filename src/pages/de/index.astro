@@ -1,0 +1,21 @@
+---
+// Legacy URL. German now lives at the site root. GitHub Pages cannot send an HTTP 301, so this is an instant
+// meta refresh (which Google treats as a permanent redirect) with a canonical link and a plain fallback link.
+import { absoluteUrl, localePath } from "../../lib/seo";
+import { defaultLocale } from "../../lib/i18n";
+
+const target = absoluteUrl(defaultLocale);
+const targetPath = localePath(defaultLocale);
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Heinrich Reich – Softwarearchitekt in der Schweiz</title>
+    <meta http-equiv="refresh" content={`0;url=${targetPath}`} />
+    <link rel="canonical" href={target} />
+  </head>
+  <body>
+    <p><a href={targetPath}>Weiter zu Heinrich Reich – Softwarearchitekt in der Schweiz</a></p>
+  </body>
+</html>

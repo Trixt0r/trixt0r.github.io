@@ -5,7 +5,7 @@ import { locales } from "../lib/i18n";
 import { absoluteUrl, findProjectPage, projectSuffix } from "../lib/seo";
 
 const content = getContent("en");
-const languageNames = { en: "English", de: "German", ru: "Russian" };
+const languageNames = { en: "English", de: "German", ru: "Russian", fr: "French", it: "Italian" };
 
 export const GET: APIRoute = () => {
   const portfolio = locales.map(

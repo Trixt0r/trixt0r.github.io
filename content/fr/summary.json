@@ -1,0 +1,16 @@
+{
+  "yearsExperienceLabel": "10+ ans d’expérience",
+  "currentRoleLabel": "Architecte logiciel",
+  "focusAreas": [
+    "Architecture et orientation technique",
+    "Développement produit full-stack",
+    "Plateformes SaaS et on-premise",
+    "Cloud, conteneurs et delivery"
+  ],
+  "blurb": "Je suis ingénieur logiciel senior et architecte, avec de l’expérience dans la mise en production de systèmes pour le e-commerce, les plateformes événementielles et les logiciels d’entreprise. J’allie réflexion architecturale, développement concret et refactoring.",
+  "about": [
+    "Qu’il s’agisse de SaaS ou de systèmes on-premise, j’accorde de l’importance à une architecture claire, à de bonnes performances et à la maintenabilité, appuyées par du monitoring et de l’automatisation.",
+    "J’aime travailler dans des équipes agiles, discuter des décisions techniques et remettre en question les approches existantes afin de trouver des solutions durables et efficaces. L’autonomie, la fiabilité et l’apprentissage continu comptent pour moi, et je collabore aussi bien avec des profils techniques qu’avec des responsables produit. Depuis Lucerne, je travaille avec des équipes en Suisse et en Europe, sur site ou à distance.",
+    "J’utilise des outils d’IA, notamment des grands modèles de langage, pour soutenir le développement, le prototypage, les revues de code et la documentation, en adaptant ma démarche à l’outil et à la tâche."
+  ]
+}

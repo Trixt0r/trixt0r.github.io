@@ -1,0 +1,126 @@
+[
+  {
+    "id": "zeit-architect",
+    "company": "zeit ag",
+    "role": "Software Architect",
+    "location": "Sursee",
+    "start": "2023-12",
+    "end": null,
+    "summary": "Responsabilità architetturale e direzione tecnica di una piattaforma aziendale modulare, con sviluppo di prodotto diretto, delivery e operatività.",
+    "highlights": [
+      "Guida architetturale, standard tecnici e strategia di implementazione per una piattaforma di prodotto critica per il business",
+      "Menzione pubblica: zeit ag indica Heinrich Reich e Simon Bled come i due sviluppatori che hanno realizzato SmartCapacity, il suo prodotto di pianificazione del personale assistita dall’IA",
+      "Sviluppo moderno di piattaforme full-stack con .NET, Angular, NestJS, Node.js e PostgreSQL",
+      "Refactoring strategici e pianificazione di technical enabler, tra consegna di prodotto e manutenibilità a lungo termine",
+      "Architettura frontend e quality engineering con librerie condivise, Storybook, test end-to-end con Playwright e monorepo Nx",
+      "Delivery cloud e infrastruttura con workload Docker, Terraform (infrastructure as code) e servizi Microsoft Azure",
+      "Leadership tecnica in collaborazione con product owner, project manager e team di ingegneria distribuiti",
+      "Architettura di produzione e prontezza operativa per i modelli di esercizio SaaS e on-premise",
+      "Sviluppo software assistito dall’IA con Claude Code, Codex, Gemini, OpenCode e workflow agentici per codice, prototipazione, review e documentazione"
+    ],
+    "tech": [
+      ".NET",
+      "Angular",
+      "PostgreSQL",
+      "Node.js",
+      "Nx",
+      "Playwright",
+      "Storybook",
+      "NestJS",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Azure",
+      "Claude Code",
+      "Codex",
+      "Gemini",
+      "OpenCode",
+      "Agentic workflows"
+    ],
+    "featured": true,
+    "references": [
+      {
+        "label": "zeit ag su LinkedIn: SmartCapacity dietro le quinte (in tedesco)",
+        "url": "https://de.linkedin.com/posts/zeit-ag_smartcapacity-softwaredevelopment-ai-activity-7495385251817525248-7K84"
+      },
+      {
+        "label": "SmartCapacity: pagina del prodotto di zeit ag (in italiano)",
+        "url": "https://zeitag.ch/it/smartcapacity-pianificazione-dei-turni-con-ia"
+      }
+    ]
+  },
+  {
+    "id": "zeit-engineer",
+    "company": "zeit ag",
+    "role": "Software Engineer",
+    "location": "Sursee",
+    "start": "2021-05",
+    "end": "2023-11",
+    "summary": "Migrazione di funzioni centrali di un software aziendale esistente dal fat client Windows al web.",
+    "highlights": [
+      "Migrazione al web di rilevazione presenze, gestione progetti e pianificazione del personale",
+      "Supporto a clienti SaaS e on-premise",
+      "Lavoro in ambienti cloud e container con CI/CD e processi di code review"
+    ],
+    "tech": [
+      "SQL Server",
+      "C#",
+      "ASP.NET",
+      "Angular",
+      "Docker",
+      "Kubernetes",
+      "Azure DevOps"
+    ],
+    "featured": true
+  },
+  {
+    "id": "nexbyte-post",
+    "company": "nexbyte GmbH",
+    "role": "Senior Software Engineer",
+    "location": "Thun",
+    "start": "2014-04",
+    "end": "2021-04",
+    "summary": "Lavoro su prodotti per i clienti della Posta Svizzera, con attenzione alla manutenibilità e all’integrazione nei processi aziendali esistenti.",
+    "highlights": [
+      "Redesign, refactoring e manutenzione di WebStamp",
+      "Realizzazione di una soluzione per la dichiarazione doganale orientata a mobile e accessibilità",
+      "Lavoro su stack PHP e JavaScript in produzione, con Linux e MariaDB"
+    ],
+    "tech": [
+      "CentOS",
+      "MariaDB",
+      "PHP",
+      "Zend Framework",
+      "JavaScript",
+      "Aurelia",
+      "Vue"
+    ],
+    "featured": true
+  },
+  {
+    "id": "nextevent",
+    "company": "NextEvent AG",
+    "role": "Senior Software Engineer",
+    "location": "Thun",
+    "start": "2016-01",
+    "end": "2021-04",
+    "summary": "Sviluppo ed evoluzione di una piattaforma modulare per eventi e di app mobili correlate.",
+    "highlights": [
+      "Piattaforma di prenotazione e vendita per concerti, conferenze, club e spettacoli",
+      "Moduli specifici per i clienti per requisiti particolari degli eventi",
+      "App mobile per controllo accessi e punto vendita con fotocamera, GPS e NFC",
+      "Servizio applicativo interno per ulteriori applicazioni NextEvent"
+    ],
+    "tech": [
+      "PHP",
+      "Node.js",
+      "Express",
+      "Backbone.js",
+      "Zend Framework",
+      "AWS",
+      "Java",
+      "Cordova"
+    ],
+    "featured": true
+  }
+]

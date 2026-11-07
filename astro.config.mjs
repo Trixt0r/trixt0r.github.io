@@ -9,8 +9,7 @@ export default defineConfig({
   site,
   base,
   output: "static",
-  build: { inlineStylesheets: "always" },
-  // German is served from the site root. GitHub Pages cannot send HTTP redirects, so this emits a
-  // static stub for the former /de/ URL (meta refresh plus canonical link pointing at the root).
-  redirects: { "/de": "/" }
+  build: { inlineStylesheets: "always" }
+  // German is served from the site root. The former /de/ URL is a hand-written stub (src/pages/de/index.astro):
+  // GitHub Pages cannot send HTTP 301s, so it is a meta refresh plus a canonical link pointing at the root.
 });

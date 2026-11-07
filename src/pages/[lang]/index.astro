@@ -17,39 +17,35 @@ const locale = (Astro.props.locale ?? Astro.params.lang) as Locale;
 const content = getContent(locale);
 const { profile, labels } = content;
 const basePath = import.meta.env.BASE_URL;
-const backToSection = { en: "Back to start of section", de: "Zum Anfang des Abschnitts", ru: "К началу раздела" }[locale];
-const careerNav = { en: "Career", de: "Werdegang", ru: "Карьера" }[locale];
-const copy = {
-  en: { nav: "Main navigation", skip: "Skip to content", experience: "Experience", projects: "Projects", skills: "Skills", about: "About", contact: "Contact", overview: "Professional overview", focus: "Areas of focus", career: "Career", careerNote: "Roles & selected work", projectNote: "Selected open source", allProjects: "More on GitHub", details: "Responsibilities & technologies", repository: "GitHub", projectDetails: "Project details", englishDetails: "Detailed project descriptions are available in English:", location: "Based in", languages: "Languages", education: "Education", connect: "Get in touch", cv: "View résumé", profile: "Profile", present: "Present" },
-  de: { nav: "Hauptnavigation", skip: "Zum Inhalt springen", experience: "Erfahrung", projects: "Projekte", skills: "Kenntnisse", about: "Über mich", contact: "Kontakt", overview: "Berufliches Profil", focus: "Schwerpunkte", career: "Beruflicher Werdegang", careerNote: "Positionen & Aufgaben", projectNote: "Ausgewählte Open-Source-Projekte", allProjects: "Mehr auf GitHub", details: "Aufgaben & Technologien", repository: "GitHub", projectDetails: "Projektdetails", englishDetails: "", location: "Standort", languages: "Sprachen", education: "Ausbildung", connect: "Kontakt aufnehmen", cv: "Lebenslauf ansehen", profile: "Profil", present: "Heute" },
-  ru: { nav: "Основная навигация", skip: "К содержанию", experience: "Опыт", projects: "Проекты", skills: "Навыки", about: "Обо мне", contact: "Контакт", overview: "Профессиональный профиль", focus: "Направления работы", career: "Опыт работы", careerNote: "Должности и задачи", projectNote: "Избранные open-source проекты", allProjects: "Больше на GitHub", details: "Обязанности и технологии", repository: "GitHub", projectDetails: "Подробнее", englishDetails: "Подробные описания проектов доступны на английском языке:", location: "Местоположение", languages: "Языки", education: "Образование", connect: "Связаться", cv: "Посмотреть резюме", profile: "Профиль", present: "Настоящее время" }
-}[locale];
+const copy = content.ui;
+const backToSection = copy.backToSection;
+const careerNav = copy.careerNav;
 // Overlapping roles are deliberately retained; sort by the beginning of each role.
 const experience = [...content.experience].sort((a, b) => b.start.localeCompare(a.start));
 const currentExperience = experience.find((item) => item.end === null);
 ---
-<BaseLayout locale={locale} content={content} pathSuffix="/" structuredData={buildProfileStructuredData(locale, content)} detectLanguage={Astro.props.locale === defaultLocale}>
+<BaseLayout locale={locale} content={content} pathSuffix="/" structuredData={buildProfileStructuredData(locale, content)}>
   <div class="portfolio" id="top">
     <a class="portfolio-skip" href="#main">{copy.skip}</a>
     <header class="portfolio-header">
       <div class="portfolio-container header-inner">
         <a class="portfolio-brand" href="#top"><span class="brand-mark" aria-hidden="true">hr<span>.</span></span><span>{profile.name}</span></a>
         <nav class="portfolio-nav" aria-label={copy.nav}>
-          <a class="nav-desktop-only" href="#about">{copy.about} / {copy.skills}</a>
-          <a class="nav-desktop-only" href="#experience">{careerNav} / {copy.projects}</a>
+          <a class="nav-desktop-only" href="#about">{copy.about} &amp; {copy.skills}</a>
+          <a class="nav-desktop-only" href="#experience">{careerNav} &amp; {copy.projects}</a>
           <a class="nav-mobile-only" href="#about">{copy.about}</a>
           <a class="nav-mobile-only" href="#skills">{copy.skills}</a>
           <a class="nav-mobile-only" href="#experience">{careerNav}</a>
           <a class="nav-mobile-only" href="#projects">{copy.projects}</a>
         </nav>
-        <div class="header-controls"><LocaleSwitcher locale={locale} labels={labels} basePath={basePath} /><ThemeToggle labels={labels} /></div>
+        <div class="header-controls"><ThemeToggle labels={labels} /></div>
       </div>
     </header>
     <main id="main" class="portfolio-container">
       <section class="intro" aria-labelledby="intro-title">
         <div class="intro-main">
           <h1 id="intro-title">{profile.name}<span class="heading-dot">.</span></h1>
-          <h2 class="intro-title">{profile.title}<span class="intro-location"> · {profile.location}</span></h2>
+          <h2 class="intro-title">{profile.title}<span class="intro-location">{profile.location}</span></h2>
           <p class="intro-lead">{content.hero.lead}</p>
           <div class="profile-links" id="contact">
             <a href={content.links.github} target="_blank" rel="noopener" title="GitHub" aria-label="GitHub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.59 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.66-.22.66-.49V19.8c-2.77.62-3.36-1.21-3.36-1.21-.45-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.62.07-.62 1.01.07 1.54 1.06 1.54 1.06.89 1.56 2.34 1.11 2.91.85.09-.67.35-1.12.63-1.38-2.21-.26-4.53-1.13-4.53-5.05 0-1.11.39-2.02 1.03-2.73-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.04a9.3 9.3 0 0 1 5 0c1.91-1.31 2.75-1.04 2.75-1.04.55 1.4.2 2.44.1 2.7.64.71 1.03 1.62 1.03 2.73 0 3.93-2.32 4.78-4.54 5.04.36.32.68.93.68 1.88v2.64c0 .27.16.59.69.49A10.24 10.24 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z"></path></svg></a>
@@ -73,7 +69,7 @@ const currentExperience = experience.find((item) => item.end === null);
           <div class="section-heading"><div><p class="section-kicker"><span>01</span> / {copy.profile}</p><h2 id="about-title">{copy.about}</h2></div><SectionTopButton label={backToSection} /></div>
           <div class="about-body"><p>{content.summary.blurb}</p><p>{content.hero.subheadline}</p>{content.summary.about.map((paragraph) => <p>{paragraph}</p>)}</div>
         </section>
-        <section class="content-section skills-section" id="skills"><div class="section-heading"><div><p class="section-kicker"><span>02</span> / {labels.techStack}</p><h2>{copy.skills}</h2></div><SectionTopButton label={backToSection} /></div><div class="skill-rows">{content.skills.groups.map((group) => <div class="skill-row"><h3 title={group.label}><SkillCategoryIcon category={group.id} /><span class="sr-only">{group.label}</span></h3><p>{group.items.join(" · ")}</p></div>)}<div class="skill-row"><h3 title={copy.languages}><SkillCategoryIcon category="languages" /><span class="sr-only">{copy.languages}</span></h3><p>{content.languages.items.map((item) => `${item.name} (${item.level})`).join(" · ")}</p></div></div></section>
+        <section class="content-section skills-section" id="skills"><div class="section-heading"><div><p class="section-kicker"><span>02</span> / {labels.techStack}</p><h2>{copy.skills}</h2></div><SectionTopButton label={backToSection} /></div><div class="skill-rows">{content.skills.groups.map((group) => <div class="skill-row"><h3 title={group.label}><SkillCategoryIcon category={group.id} /><span class="sr-only">{group.label}</span></h3><p>{group.items.join(" · ")}</p></div>)}<div class="skill-row"><h3 title={copy.languages}><SkillCategoryIcon category="languages" /><span class="sr-only">{copy.languages}</span></h3><p>{content.languages.items.map((item) => `${item.name} (${item.level})`).join(" · ")}</p>{copy.translationNote && <p class="translation-note">{copy.translationNote}</p>}</div></div></section>
       </div>
 
       <div class="portfolio-columns">
@@ -85,7 +81,7 @@ const currentExperience = experience.find((item) => item.end === null);
               <div class="career-date">{formatPeriod(item.start, item.end, locale, copy.present)}</div>
               <article class="career-content"><h3>{item.role}</h3><p class="career-company">{item.company} <span>· {item.location}</span></p><p class="career-summary">{item.summary}</p>
                 <ul class="tech-list" aria-label={labels.techStack}>{item.tech.slice(0, 5).map((tech) => <TechPill label={tech} iconOnly />)}</ul>
-                <details class="career-details"><summary>{copy.details}</summary><ul>{item.highlights.map((highlight) => <li>{highlight}</li>)}</ul><p><strong>{labels.techStack}:</strong> {item.tech.join(" · ")}</p></details>
+                <details class="career-details"><summary>{copy.details}</summary><ul>{item.highlights.map((highlight) => <li>{highlight}</li>)}</ul><p><strong>{labels.techStack}:</strong> {item.tech.join(" · ")}</p>{item.references && <p class="career-references"><strong>{copy.references}:</strong> {item.references.map((reference, index) => <>{index > 0 && " · "}<a href={reference.url} target="_blank" rel="noopener">{reference.label} <span aria-hidden="true">↗</span></a></>)}</p>}</details>
               </article>
             </li>)}
             {content.education.items.map((education) => <li class="career-item">
@@ -111,7 +107,7 @@ const currentExperience = experience.find((item) => item.end === null);
 
       <div class="end-spacer" aria-hidden="true"></div>
     </main>
-    <footer class="portfolio-footer"><div class="portfolio-container footer-inner"><span>© {new Date().getFullYear()} {profile.name}</span><a href="#top">↑ {copy.profile}</a></div></footer>
+    <footer class="portfolio-footer"><div class="portfolio-container footer-inner"><a class="footer-top" href="#top" title={copy.backToTop}>© {new Date().getFullYear()} {profile.name}</a><LocaleSwitcher locale={locale} labels={labels} basePath={basePath} /></div></footer>
   </div>
 </BaseLayout>
 

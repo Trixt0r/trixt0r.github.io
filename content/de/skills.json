@@ -3,32 +3,75 @@
     {
       "id": "frontend",
       "label": "Frontend",
-      "items": ["Angular", "Vue", "Aurelia", "JavaScript", "TypeScript", "Bootstrap", "DevExtreme"]
+      "items": [
+        "Angular",
+        "Vue",
+        "Aurelia",
+        "JavaScript",
+        "TypeScript",
+        "Bootstrap",
+        "DevExtreme"
+      ]
     },
     {
       "id": "backend",
       "label": "Backend",
-      "items": ["PHP", "Node.js", "C#", ".NET", "ASP.NET", "Java", "Zend Framework", "Express"]
+      "items": [
+        "PHP",
+        "Node.js",
+        "C#",
+        ".NET",
+        "ASP.NET",
+        "Java",
+        "Zend Framework",
+        "Express"
+      ]
     },
     {
       "id": "data",
       "label": "Daten und Persistence",
-      "items": ["SQL Server", "MariaDB", "PostgreSQL", "Redis"]
+      "items": [
+        "SQL Server",
+        "MariaDB",
+        "PostgreSQL",
+        "Redis"
+      ]
     },
     {
       "id": "cloud",
       "label": "Cloud und Infrastruktur",
-      "items": ["Azure", "AWS", "Docker", "Kubernetes", "Linux", "EC2"]
+      "items": [
+        "Azure",
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "Linux",
+        "EC2"
+      ]
     },
     {
       "id": "delivery",
       "label": "Delivery und Zusammenarbeit",
-      "items": ["Azure DevOps", "GitHub", "CI/CD", "Code Reviews", "Jira", "Confluence"]
+      "items": [
+        "Azure DevOps",
+        "GitHub",
+        "CI/CD",
+        "Code Reviews",
+        "Jira",
+        "Confluence"
+      ]
     },
     {
       "id": "ai",
-      "label": "KI-Werkzeuge und agentische Entwicklung",
-      "items": ["Claude", "ChatGPT (Codex)", "Gemini", "OpenCode", "Spec-driven development", "Software factories"]
+      "label": "KI-gestützte Entwicklung",
+      "items": [
+        "Claude",
+        "ChatGPT (Codex)",
+        "Gemini",
+        "OpenCode",
+        "Spec-driven development",
+        "Software factories"
+      ]
     }
   ]
 }

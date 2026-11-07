@@ -1,5 +1,5 @@
 ---
-import { buildPath, locales } from "../lib/i18n";
+import { buildPath, localeNames, locales } from "../lib/i18n";
 import type { Locale, Labels } from "../lib/types";
 
 interface Props {
@@ -12,7 +12,6 @@ interface Props {
 }
 
 const { locale, pathSuffix = "/", basePath, labels, available = locales } = Astro.props;
-const languageNames: Record<Locale, string> = { de: "Deutsch", en: "English", ru: "Русский" };
 ---
 
 <nav class="locale-links" aria-label={labels.localeLabel}>
@@ -24,7 +23,7 @@ const languageNames: Record<Locale, string> = { de: "Deutsch", en: "English", ru
       data-locale={value}
       lang={value}
       hreflang={value}
-      aria-label={`${value.toUpperCase()} – ${languageNames[value]}`}
+      aria-label={`${value.toUpperCase()} – ${localeNames[value]}`}
       aria-current={value === locale ? "page" : undefined}
     >
       {value.toUpperCase()}
@@ -33,7 +32,7 @@ const languageNames: Record<Locale, string> = { de: "Deutsch", en: "English", ru
 </nav>
 
 <script>
-  // Remember an explicit choice so the root URL does not override it on the next visit.
+  // Remember an explicit choice; it only informs the dismissible language suggestion, never an automatic redirect.
   for (const link of document.querySelectorAll<HTMLAnchorElement>("[data-locale-link]")) {
     link.addEventListener("click", () => {
       try { localStorage.setItem("preferred-locale", link.dataset.locale ?? ""); } catch {}

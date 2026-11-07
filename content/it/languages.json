@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "name": "Tedesco",
+      "level": "Madrelingua"
+    },
+    {
+      "name": "Russo",
+      "level": "Madrelingua"
+    },
+    {
+      "name": "Inglese",
+      "level": "Fluente"
+    }
+  ]
+}

@@ -9,6 +9,7 @@
     "summary": "Architecture leadership for a modular business platform, combining strategic technical direction with hands-on product engineering, delivery, and operations.",
     "highlights": [
       "Architecture leadership, technical standards, and implementation strategy for a business-critical product platform",
+      "Publicly credited: zeit ag names Heinrich Reich and Simon Bled as the two developers who built SmartCapacity, its AI-assisted workforce planning product",
       "Modern full-stack platform engineering with .NET, Angular, NestJS, Node.js, and PostgreSQL",
       "Strategic refactoring and technical-enabler planning that balance product delivery with long-term maintainability",
       "Frontend architecture and quality engineering with shared libraries, Storybook, Playwright end-to-end testing, and an Nx monorepo",
@@ -17,8 +18,36 @@
       "Production architecture and operational readiness for both SaaS and on-premises deployment models",
       "AI-augmented software development with Claude Code, Codex, Gemini, OpenCode, and agentic workflows for coding, prototyping, reviews, and documentation"
     ],
-    "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "Playwright", "Storybook", "NestJS", "Docker", "Kubernetes", "Terraform", "Azure", "Claude Code", "Codex", "Gemini", "OpenCode", "Agentic workflows"],
-    "featured": true
+    "tech": [
+      ".NET",
+      "Angular",
+      "PostgreSQL",
+      "Node.js",
+      "Nx",
+      "Playwright",
+      "Storybook",
+      "NestJS",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Azure",
+      "Claude Code",
+      "Codex",
+      "Gemini",
+      "OpenCode",
+      "Agentic workflows"
+    ],
+    "featured": true,
+    "references": [
+      {
+        "label": "zeit ag on LinkedIn: behind the scenes of SmartCapacity (German)",
+        "url": "https://de.linkedin.com/posts/zeit-ag_smartcapacity-softwaredevelopment-ai-activity-7495385251817525248-7K84"
+      },
+      {
+        "label": "SmartCapacity: zeit ag product page (English)",
+        "url": "https://zeitag.ch/en/smartcapacity-ai-assisted-workforce-and-shift-planning"
+      }
+    ]
   },
   {
     "id": "zeit-engineer",
@@ -33,7 +62,15 @@
       "Supported both SaaS and on-premise customers",
       "Worked in cloud and container environments with CI/CD and code review processes"
     ],
-    "tech": ["SQL Server", "C#", "ASP.NET", "Angular", "Docker", "Kubernetes", "Azure DevOps"],
+    "tech": [
+      "SQL Server",
+      "C#",
+      "ASP.NET",
+      "Angular",
+      "Docker",
+      "Kubernetes",
+      "Azure DevOps"
+    ],
     "featured": true
   },
   {
@@ -49,7 +86,15 @@
       "Built a mobile- and accessibility-oriented customs declaration solution",
       "Delivered on production PHP and JavaScript stacks running on Linux and MariaDB"
     ],
-    "tech": ["CentOS", "MariaDB", "PHP", "Zend Framework", "JavaScript", "Aurelia", "Vue"],
+    "tech": [
+      "CentOS",
+      "MariaDB",
+      "PHP",
+      "Zend Framework",
+      "JavaScript",
+      "Aurelia",
+      "Vue"
+    ],
     "featured": true
   },
   {
@@ -66,7 +111,16 @@
       "Mobile admissions and POS app using camera, GPS, and NFC",
       "Internal app service for additional NextEvent applications"
     ],
-    "tech": ["PHP", "Node.js", "Express", "Backbone.js", "Zend Framework", "AWS", "Java", "Cordova"],
+    "tech": [
+      "PHP",
+      "Node.js",
+      "Express",
+      "Backbone.js",
+      "Zend Framework",
+      "AWS",
+      "Java",
+      "Cordova"
+    ],
     "featured": true
   }
 ]

@@ -42,12 +42,13 @@ const pages = files.map((file) => {
     )
   };
 });
-const indexable = pages.filter((page) => !page.redirect);
+// Redirect stubs and the 404 page are deliberately outside the indexable set.
+const indexable = pages.filter((page) => !page.redirect && !/noindex/.test(page.robots ?? ""));
 const byUrl = new Map(pages.map((page) => [page.url, page]));
 
 test("expected pages are built", () => {
-  assert.ok(indexable.length >= 3, "home pages for each language");
-  for (const lang of ["", "en/", "ru/"]) assert.ok(byUrl.has(new URL(`${base}${lang}`.replace("//", "/"), site).toString()), `missing ${lang || "root"}`);
+  assert.ok(indexable.length >= 5, "home pages for each language");
+  for (const lang of ["", "en/", "ru/", "fr/", "it/"]) assert.ok(byUrl.has(new URL(`${base}${lang}`.replace("//", "/"), site).toString()), `missing ${lang || "root"}`);
 });
 
 test("every indexable page has unique localized metadata and a self-referencing canonical", () => {
@@ -71,7 +72,7 @@ test("every indexable page has unique localized metadata and a self-referencing 
 
 test("html lang matches the language of the URL", () => {
   for (const page of indexable) {
-    const expected = new URL(page.url).pathname.replace(base, "/").match(/^\/(en|ru)\//)?.[1] ?? "de";
+    const expected = new URL(page.url).pathname.replace(base, "/").match(/^\/(en|ru|fr|it)\//)?.[1] ?? "de";
     assert.equal(page.lang, expected, page.url);
   }
 });
@@ -110,11 +111,76 @@ test("robots.txt allows crawling and references the sitemap", () => {
   assert.ok(robots.includes(`Sitemap: ${new URL(`${base}sitemap.xml`, site)}`));
 });
 
-test("former /de/ URL is a redirect stub that consolidates on the root", () => {
+test("former /de/ URL is a documented HTML redirect to the root, outside sitemap and alternates", () => {
   const stub = pages.find((page) => page.url === new URL(`${base}de/`, site).toString());
   assert.ok(stub?.redirect, "/de/ should be a redirect stub");
+  assert.match(stub.html, /http-equiv="refresh" content="0;url=/);
   assert.equal(stub.canonical, new URL(base, site).toString());
-  assert.ok(!Object.values(indexable[0].alternates).includes(stub.url));
+  assert.doesNotMatch(stub.robots ?? "", /noindex/, "a redirect stub should not also carry noindex");
+  assert.equal(pages.filter((page) => page.redirect).length, 1, "no other meta refresh pages");
+  const sitemap = readFileSync(join(dist, "sitemap.xml"), "utf8");
+  assert.ok(!sitemap.includes(stub.url));
+  for (const page of indexable) assert.ok(!Object.values(page.alternates).includes(stub.url));
+});
+
+test("404.html exists, is noindex and links to every language home", () => {
+  const page = pages.find((p) => p.url.endsWith("/404.html") || p.file.endsWith("404.html"));
+  assert.ok(page, "dist/404.html");
+  assert.match(page.robots ?? "", /noindex/);
+  assert.ok(!page.canonical, "404 must not declare a canonical");
+  for (const home of indexable.filter((p) => p.url.split("/").filter(Boolean).length <= 3 && !p.url.includes("/projects/"))) {
+    assert.ok(page.html.includes(`href="${new URL(home.url).pathname}"`), `404 links ${home.url}`);
+  }
+});
+
+test("language is chosen by URL: no automatic redirect, no crawler sniffing, no meta keywords", () => {
+  for (const page of pages.filter((p) => !p.redirect)) {
+    assert.doesNotMatch(page.html, /location\.replace|navigator\.userAgent|bot\|crawl/, `${page.file}: language redirect or UA sniffing`);
+    assert.doesNotMatch(page.html, /<meta name="keywords"/, `${page.file}: meta keywords`);
+  }
+});
+
+test("language switcher offers crawlable links to every available equivalent", () => {
+  for (const page of indexable) {
+    const nav = page.html.match(/<nav class="locale-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
+    const hrefs = [...nav.matchAll(/<a[^>]*\shref="([^"]+)"/g)].map((m) => new URL(m[1], page.url).toString());
+    const expected = Object.entries(page.alternates).filter(([lang]) => lang !== "x-default").map(([, href]) => href);
+    assert.deepEqual(hrefs.sort(), expected.sort(), `${page.url}: switcher vs hreflang`);
+  }
+});
+
+test("each homepage pairs the full name, a role and Switzerland in title and h1/h2", () => {
+  const switzerland = { de: "Schweiz", en: "Switzerland", ru: "Швейцари", fr: "Suisse", it: "Svizzera" };
+  for (const page of indexable.filter((p) => !p.url.includes("/projects/"))) {
+    assert.match(page.title, /^Heinrich Reich/, page.url);
+    assert.match(page.title, new RegExp(switzerland[page.lang]), `${page.url}: title mentions Switzerland`);
+    assert.match(page.description, new RegExp(switzerland[page.lang]), `${page.url}: description mentions Switzerland`);
+    assert.match(page.html, /<h1[^>]*>Heinrich Reich/, page.url);
+    const h2 = page.html.match(/<h2 class="intro-title">(.*?)<\/h2>/s)?.[1] ?? "";
+    assert.match(h2, new RegExp(switzerland[page.lang]), `${page.url}: subtitle`);
+  }
+});
+
+test("headings never skip a level", () => {
+  for (const page of indexable) {
+    let previous = 0;
+    for (const m of page.html.matchAll(/<h([1-6])[\s>]/g)) {
+      const level = Number(m[1]);
+      assert.ok(level <= previous + 1, `${page.url}: h${level} after h${previous}`);
+      previous = level;
+    }
+  }
+});
+
+test("French and Italian homepages are translated, not English copies", () => {
+  const en = indexable.find((p) => p.lang === "en" && !p.url.includes("/projects/"));
+  const enText = [...en.html.matchAll(/<p[^>]*>([^<]{60,})<\/p>/g)].map((m) => m[1]).filter((text) => !text.includes(" · ")); // technology lists are legitimately identical
+  for (const lang of ["fr", "it"]) {
+    const page = indexable.find((p) => p.lang === lang && !p.url.includes("/projects/"));
+    assert.ok(page, lang);
+    const shared = enText.filter((text) => page.html.includes(text));
+    assert.deepEqual(shared, [], `${lang}: paragraphs identical to English`);
+  }
 });
 
 test("structured data parses, keeps one stable person id and matches the canonical URL", () => {
@@ -132,6 +198,12 @@ test("structured data parses, keeps one stable person id and matches the canonic
       assert.equal(profile.mainEntity["@type"], "Person");
       personIds.add(profile.mainEntity["@id"]);
       assert.ok(profile.mainEntity.sameAs.length >= 2);
+      assert.equal(profile.mainEntity.alternateName, "Trixt0r");
+      assert.deepEqual(profile.mainEntity.knowsLanguage, ["de", "ru", "en"]);
+      assert.ok(profile.mainEntity.image.startsWith("https://"), "absolute image URL");
+      assert.ok(page.html.includes(profile.mainEntity.jobTitle), "jobTitle appears in visible content");
+      assert.match(profile.dateModified, /^\d{4}-\d{2}-\d{2}$/);
+      assert.ok(!JSON.stringify(blocks).match(/AI Engineer|KI-Engineer|ingénieur IA/i), "no AI-engineer title in structured data");
     } else {
       const source = nodes.find((node) => node["@type"] === "SoftwareSourceCode");
       personIds.add(source.author["@id"]);
@@ -139,6 +211,8 @@ test("structured data parses, keeps one stable person id and matches the canonic
       assert.ok(nodes.some((node) => node["@type"] === "BreadcrumbList"));
     }
   }
+  const websiteIds = new Set(indexable.flatMap((page) => [...page.html.matchAll(/"@type":"WebSite","@id":"([^"]+)"/g)].map((m) => m[1])));
+  assert.equal(websiteIds.size, 1, "one stable WebSite id");
   assert.equal(personIds.size, 1, `person @id must be stable across pages: ${[...personIds]}`);
 });
 

@@ -1,33 +1,19 @@
 import type { Locale } from "./types";
 
-export const locales: Locale[] = ["de", "en", "ru"];
+export const locales: Locale[] = ["de", "en", "ru", "fr", "it"];
 export const defaultLocale: Locale = "de";
+/** hreflang x-default: the language for visitors outside every offered language. */
+export const fallbackLocale: Locale = "en";
 
 export function isLocale(value: string | undefined): value is Locale {
   return typeof value === "string" && locales.includes(value as Locale);
 }
 
-export function normalizeLocale(input: string | undefined): Locale {
-  if (!input) {
-    return defaultLocale;
-  }
+/** Display names in their own language, used for the language switcher. */
+export const localeNames: Record<Locale, string> = { de: "Deutsch", en: "English", ru: "Русский", fr: "Français", it: "Italiano" };
 
-  const lowered = input.toLowerCase();
-
-  if (lowered.startsWith("de")) {
-    return "de";
-  }
-
-  if (lowered.startsWith("ru")) {
-    return "ru";
-  }
-
-  if (lowered.startsWith("en")) {
-    return "en";
-  }
-
-  return defaultLocale;
-}
+/** Open Graph locales. Regions are only used where the content targets Switzerland. */
+export const ogLocales: Record<Locale, string> = { de: "de_CH", en: "en_US", ru: "ru_RU", fr: "fr_CH", it: "it_CH" };
 
 export function formatPeriod(start: string, end: string | null, locale: Locale, todayLabel: string) {
   const formatter = new Intl.DateTimeFormat(locale, {

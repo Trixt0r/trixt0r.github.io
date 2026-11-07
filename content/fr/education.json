@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "institution": "Université de Berne",
+      "location": "Berne",
+      "degree": "Études d’informatique",
+      "period": "2010 - 2014",
+      "summary": "La partie informatique, y compris le travail de bachelor sur le deferred rendering avec Java et OpenGL, a été achevée. Les branches secondaires n’ont pas été poursuivies lors de l’entrée à plein temps dans l’industrie."
+    },
+    {
+      "institution": "Richard von Weizsacker Berufskolleg",
+      "location": "Dülmen",
+      "degree": "Certificat d’aptitude générale aux études supérieures (Allgemeine Hochschulreife)",
+      "period": "2007 - 2010",
+      "summary": "Accent sur les mathématiques et l’informatique."
+    }
+  ]
+}
