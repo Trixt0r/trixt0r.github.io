@@ -7,7 +7,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "astro build && node --test scripts/"
+    "test": "astro build && node --test scripts/seo.test.mjs"
   },
   "dependencies": {
     "@iconify-json/devicon-plain": "^1.2.57",
