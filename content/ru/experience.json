@@ -6,15 +6,15 @@
     "location": "Sursee",
     "start": "2023-12",
     "end": null,
-    "summary": "Архитектурное лидерство для модульной бизнес-платформы: стратегическое техническое развитие в сочетании с hands-on разработкой, delivery и эксплуатацией.",
+    "summary": "Архитектурное руководство модульной бизнес-платформой: стратегическое техническое развитие в сочетании с практической разработкой, поставкой релизов и эксплуатацией.",
     "highlights": [
       "Архитектурное лидерство, технические стандарты и стратегия реализации для критически важной продуктовой платформы",
       "Современная full-stack разработка платформы на .NET, Angular, NestJS, Node.js и PostgreSQL",
-      "Стратегический refactoring и планирование technical enablers с балансом между delivery и долгосрочной maintainability",
-      "Frontend-архитектура и quality engineering с shared libraries, Storybook, end-to-end тестами на Playwright и Nx monorepo",
-      "Cloud и infrastructure delivery с Docker workloads, Terraform Infrastructure as Code и Microsoft Azure Services",
-      "Техническое лидерство во взаимодействии с product owners, project managers и распределенными engineering-командами",
-      "Production architecture и operational readiness для SaaS и on-premise моделей эксплуатации",
+      "Стратегический рефакторинг и планирование технических улучшений с балансом между поставкой функций и долгосрочной поддерживаемостью",
+      "Архитектура фронтенда и обеспечение качества: общие библиотеки, Storybook, сквозные тесты на Playwright и монорепозиторий на Nx",
+      "Облачная инфраструктура и её поставка: Docker-нагрузки, Terraform (Infrastructure as Code) и сервисы Microsoft Azure",
+      "Техническое лидерство во взаимодействии с владельцами продукта, руководителями проектов и распределёнными командами разработки",
+      "Продуктивная архитектура и готовность к эксплуатации для SaaS- и on-premise-моделей",
       "AI-augmented software development с Claude Code, Codex, Gemini, OpenCode и agentic workflows для кода, прототипов, reviews и документации"
     ],
     "tech": [".NET", "Angular", "PostgreSQL", "Node.js", "Nx", "Playwright", "Storybook", "NestJS", "Docker", "Kubernetes", "Terraform", "Azure", "Claude Code", "Codex", "Gemini", "OpenCode", "Agentic Workflows"],
@@ -27,7 +27,7 @@
     "location": "Sursee",
     "start": "2021-05",
     "end": "2023-11",
-    "summary": "Миграция ключевых возможностей бизнес-системы с Windows fat client в web.",
+    "summary": "Перенос ключевых функций бизнес-системы с настольного Windows-клиента в веб.",
     "highlights": [
       "Web-миграция функций учета времени, project management и планирования персонала",
       "Поддержка клиентов в моделях SaaS и on-premise",
@@ -43,7 +43,7 @@
     "location": "Thun",
     "start": "2014-04",
     "end": "2021-04",
-    "summary": "Работа над клиентскими продуктами Swiss Post с фокусом на maintainability и интеграцию в существующие бизнес-процессы.",
+    "summary": "Работа над клиентскими продуктами Швейцарской почты с акцентом на поддерживаемость и интеграцию в существующие бизнес-процессы.",
     "highlights": [
       "Редизайн, рефакторинг и сопровождение WebStamp",
       "Разработка решения для таможенного декларирования с упором на mobile и accessibility",
@@ -59,7 +59,7 @@
     "location": "Thun",
     "start": "2016-01",
     "end": "2021-04",
-    "summary": "Разработка и развитие модульной event-платформы и связанных mobile-приложений.",
+    "summary": "Разработка и развитие модульной платформы для мероприятий и связанных мобильных приложений.",
     "highlights": [
       "Платформа бронирования и продаж для концертов, конференций, клубов и шоу",
       "Клиентские модули под требования конкретных мероприятий",

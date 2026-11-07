@@ -1,0 +1,247 @@
+[
+  {
+    "id": "ecsts",
+    "seoTitle": "ECSTS: Entity-Component-System für TypeScript | Heinrich Reich",
+    "description": "ECSTS (@trixt0r/ecs) ist eine kleine Entity-Component-System-Bibliothek für TypeScript und JavaScript. Aufbau, Designentscheidungen, Grenzen und Status des Open-Source-Projekts.",
+    "heading": "ECSTS – Entity-Component-System für TypeScript",
+    "lead": "ECSTS ist eine Entity-Component-System-Bibliothek für TypeScript und JavaScript. Sie trennt Daten (Komponenten) von Verhalten (Systeme) und enthält bewusst keine spielspezifische Logik.",
+    "status": "Auf npm veröffentlicht (Version 0.5.1, März 2022), API vor 1.0",
+    "period": "seit 2019",
+    "updatedAt": "2026-11-07",
+    "sections": [
+      {
+        "id": "overview",
+        "heading": "Was das Projekt macht",
+        "paragraphs": [
+          "Ein Entity-Component-System (ECS) strukturiert eine Anwendung so, dass Entitäten lediglich Komponenten tragen und Systeme das Verhalten für alle Entitäten umsetzen, die bestimmte Komponenten besitzen. ECSTS liefert dafür die Grundbausteine: Component, Entity, System und Engine, die Systeme und Entitäten zusammenführt.",
+          "Das Paket erscheint auf npm als @trixt0r/ecs. Das README beschreibt es als Bibliothek für jeden Anwendungsfall. Das Beispiel im Repository ist eine kleine Rechteck-Simulation mit Position, Grösse und Geschwindigkeit als Komponenten sowie Systemen für Bewegung, Gravitation, Kollision und Darstellung."
+        ]
+      },
+      {
+        "id": "constraints",
+        "heading": "Anspruch und Rahmenbedingungen",
+        "paragraphs": [
+          "Laut README soll die Bibliothek ohne spielspezifische Logik auskommen, und laut npm-Beschreibung in jeder JavaScript-Umgebung laufen. Entsprechend nennt der Changelog ab Version 0.2.2 ES5 als Compile-Ziel. Typdeklarationen werden mit dem Paket ausgeliefert."
+        ]
+      },
+      {
+        "id": "role",
+        "heading": "Meine Rolle",
+        "paragraphs": [
+          "Ich habe das Repository im Mai 2019 angelegt und die erste Version Ende Mai 2019 auf npm veröffentlicht. Das Repository liegt in meinem GitHub-Account; Issues und Pull Requests sind laut README willkommen. ECSTS ist ausserdem als Abhängigkeit in meinem Editor-Projekt Y.A.M.E. eingetragen."
+        ]
+      },
+      {
+        "id": "decisions",
+        "heading": "Wichtige Designentscheidungen",
+        "items": [
+          "Komponenten sind schlichte Typen: Component ist ein Interface ohne Pflichtmitglieder. Das README empfiehlt Klassen, weil Systeme Komponenten über ihren Typ nachschlagen.",
+          "Keine eigene ID-Erzeugung: AbstractEntity ist abstrakt, die ID liefert der Anwender. Die Bibliothek schreibt kein ID-Schema vor.",
+          "Aspects statt manueller Filter: Seit Version 0.1.0 ersetzt Aspect (mit all, one und exclude) den früheren Filter. Ein System beschreibt, welche Komponenten es braucht, und erhält die passenden Entitäten. Ab 0.2.0 melden Aspects zudem das Hinzufügen und Entfernen von Entitäten und Komponenten.",
+          "Weniger Boilerplate für Systeme: AbstractEntitySystem nimmt die benötigten Komponententypen im Konstruktor entgegen und übernimmt das Aspect-Setup.",
+          "Synchron oder asynchron: process darf asynchron sein. engine.run kann Systeme nacheinander (SUCCESSIVE) oder parallel (PARALLEL) ausführen.",
+          "Beobachtbar: Entitäten, Systeme und die Engine sind Dispatcher, bei denen sich Listener für Änderungen registrieren lassen.",
+          "Zugriff über ID: Die mit 0.5.0 eingeführte EntityCollection erlaubt Aufrufe wie engine.entities.get(1)."
+        ]
+      },
+      {
+        "id": "tradeoffs",
+        "heading": "Kompromisse und Grenzen",
+        "items": [
+          "Version 0.x: Die API hat sich zwischen Versionen geändert, zum Beispiel in 0.1.0, als Filter zu Aspect wurde und Engine.getFilter entfiel. Wer ECSTS einsetzt, sollte die Version festschreiben und den Changelog lesen.",
+          "Bewusst schlank: Rendering, Physik, Eingabe und Asset-Verwaltung gehören nicht zur Bibliothek und müssen von der Anwendung kommen.",
+          "Ältere Toolchain: Als Entwicklungsabhängigkeiten sind unter anderem TypeScript 3.9 und Jest 27 eingetragen. Die Pflege ist seit 2022 nicht weitergeführt worden."
+        ]
+      },
+      {
+        "id": "tech",
+        "heading": "Technologien und Gründe",
+        "items": [
+          "TypeScript: Typen und Deklarationsdateien (build/index.d.ts) gehören zum Paket, sodass Systeme und Komponenten typgeprüft entwickelt werden können.",
+          "Jest: Zu jedem Kernmodul (Aspect, Collection, Component, Dispatcher, Engine, Entity, EntityCollection, System) gibt es eine Spec-Datei. Der Changelog nennt seit 0.4.4 eine Testabdeckung von 100 %.",
+          "ESLint und Prettier: Konfiguration für einheitlichen Code liegt im Repository.",
+          "npm: Verteilung als @trixt0r/ecs; 25 Versionen seit Mai 2019."
+        ]
+      },
+      {
+        "id": "status",
+        "heading": "Aktueller Stand",
+        "paragraphs": [
+          "Die aktuelle npm-Version ist 0.5.1 vom 19. März 2022. Der letzte Commit im Standard-Branch stammt vom selben Tag. Das Projekt ist veröffentlicht und nutzbar, wird aber derzeit nicht aktiv weiterentwickelt. Nutzungszahlen nenne ich hier nicht."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Repository auf GitHub", "url": "https://github.com/Trixt0r/ecsts" },
+      { "label": "Paket auf npm", "url": "https://www.npmjs.com/package/@trixt0r/ecs" },
+      { "label": "Beispiel „Rectangles“ auf StackBlitz", "url": "https://stackblitz.com/edit/ecs-example-rectangles" },
+      { "label": "Changelog", "url": "https://github.com/Trixt0r/ecsts/blob/master/CHANGELOG.MD" }
+    ],
+    "sourcesNote": "Grundlage dieser Seite sind README, Changelog, package.json, Dateistruktur und Commit-Verlauf des öffentlichen Repositorys sowie die npm-Registry (Stand 7. November 2026). Den Quellcode habe ich dafür nicht erneut im Detail durchgesehen."
+  },
+  {
+    "id": "yame",
+    "seoTitle": "Y.A.M.E.: Erweiterbarer 2D-Map-Editor mit Angular und Electron | Heinrich Reich",
+    "description": "Y.A.M.E. ist ein generischer, per Plugins erweiterbarer 2D-Map-Editor auf Basis von Angular, Electron und PixiJS. Aufbau, Entscheidungen, Grenzen und Status des Projekts.",
+    "heading": "Y.A.M.E. – erweiterbarer 2D-Map-Editor",
+    "lead": "Y.A.M.E. ist ein generischer 2D-Map-Editor als Desktop-Anwendung. Er soll für beliebige zweidimensionale Karten einsetzbar sein und lässt sich über Plugins erweitern.",
+    "status": "In Entwicklung, keine veröffentlichte stabile Version (Paketversion 0.0.1)",
+    "period": "seit 2016",
+    "updatedAt": "2026-11-07",
+    "sections": [
+      {
+        "id": "overview",
+        "heading": "Was das Projekt macht",
+        "paragraphs": [
+          "Y.A.M.E. ist ein Editor für Karten in 2D. Die Paketbeschreibung nennt ihn „generisch, erweiterbar und für jede Art von Karte“. Das Repository enthält unter anderem Module für Szene, Tilesets, Kamera, Werkzeugleiste, Seitenleiste, Assets und Einstellungen.",
+          "Das Projekt entsteht als privates Projekt für meine eigenen Workflows. Eine öffentlich nutzbare stabile Version ist geplant, aber noch nicht veröffentlicht."
+        ]
+      },
+      {
+        "id": "constraints",
+        "heading": "Ausgangslage und Ziele",
+        "paragraphs": [
+          "Der Editor geht auf eine ältere Implementierung auf Basis von Backbone zurück. Das README beschreibt die Neuentwicklung mit Angular als Ablösung dieser als fehleranfällig bezeichneten Version. Als Hauptziele nennt es:"
+        ],
+        "items": [
+          "Angular-Datenbindung nutzen und die selbstgebaute Backbone-Lösung ersetzen.",
+          "Ein schnelleres Publish/Subscribe-System auf Basis von eventemitter3.",
+          "Promises statt Callbacks im Node.js-Stil.",
+          "Das Komponenten- und Entity-System aufräumen, um die Wartbarkeit zu verbessern."
+        ]
+      },
+      {
+        "id": "role",
+        "heading": "Meine Rolle",
+        "paragraphs": [
+          "Ich habe das Repository im Oktober 2016 angelegt und entwickle den Editor in meiner Freizeit. Im package.json ist mein Name als Autor eingetragen. Ob und welche Beiträge Dritter eingeflossen sind, habe ich für diese Seite nicht ausgewertet."
+        ]
+      },
+      {
+        "id": "decisions",
+        "heading": "Wichtige Architekturentscheidungen",
+        "paragraphs": [
+          "Die folgenden Punkte ergeben sich aus der Struktur des Repositorys und dem Paketmanifest:"
+        ],
+        "items": [
+          "Zwei Prozesse, klar getrennt: Der Electron-Hauptprozess (src/main) kümmert sich per IPC um Dateien, Verzeichnisse, Dialoge und Plugins. Die Angular-Oberfläche (src/ng) läuft im Renderer. Gemeinsam genutzter Code (src/common) enthält unter anderem das Szenenmodell, die Plugin-Verwaltung, Logger und Pub/Sub.",
+          "Plugin-Architektur: Plugins werden über die config.json gefunden (Muster ./node_modules/@yame/*) und von einem Plugin-Manager geladen. Das Plugin yame-dev dient im Entwicklungsmodus als Beispiel und lädt die Oberfläche bei Codeänderungen neu.",
+          "Szenenmodell mit Entitäten und Komponenten: Der Code unter src/common/scene arbeitet mit Entity- und Component-Konzepten; ECSTS (@trixt0r/ecs) ist als Abhängigkeit eingetragen.",
+          "Rendering mit PixiJS: Die Karte wird per WebGL gezeichnet, mit Tilemap-Unterstützung über @pixi/tilemap.",
+          "Zustand und Sprache: NGXS verwaltet den Editorzustand, ngx-translate stellt die Übersetzungen bereit."
+        ]
+      },
+      {
+        "id": "tradeoffs",
+        "heading": "Kompromisse und Grenzen",
+        "items": [
+          "Keine stabile Version: Der Editor wird aus dem Quellcode gestartet. package.json enthält Skripte zum Paketieren für Linux, Windows und macOS, veröffentlichte Builds gibt es nicht.",
+          "Veraltetes README: Das README im Standard-Branch beschreibt noch die Migrationsphase (Branch ng2, Node 10). Die Abhängigkeiten in package.json sind deutlich aktueller (Angular 19, Electron 33). Verlässlich sind daher Paketmanifest und Quellcode.",
+          "Desktop statt Web: Electron ermöglicht direkten Dateizugriff, bringt aber mehr Laufzeitaufwand mit als eine reine Webanwendung.",
+          "Persönliches Projekt: Der Fortschritt hängt von meiner freien Zeit ab."
+        ]
+      },
+      {
+        "id": "tech",
+        "heading": "Technologien und Gründe",
+        "items": [
+          "Angular 19: Oberfläche des Editors; die Datenbindung ersetzt die frühere selbstgebaute Backbone-Lösung.",
+          "Electron 33: Desktop-Hülle mit Zugriff auf das Dateisystem.",
+          "TypeScript: durchgängig für Hauptprozess, gemeinsamen Code und Oberfläche.",
+          "PixiJS 6 mit @pixi/tilemap: Darstellung der Karten per WebGL.",
+          "NGXS und ngx-translate: Zustandsverwaltung und Mehrsprachigkeit."
+        ]
+      },
+      {
+        "id": "status",
+        "heading": "Aktueller Stand",
+        "paragraphs": [
+          "Im Standard-Branch sind Aktualisierungen auf Angular 18 (Juni 2024) und Angular 19 (Januar 2025) sowie Electron-Updates verzeichnet. Der letzte inhaltliche Commit vom 16. Juni 2025 ergänzt das Entfernen von Tiles. Das Projekt ist also in Arbeit, aber nicht als fertiges Produkt veröffentlicht."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Repository auf GitHub", "url": "https://github.com/Trixt0r/yame" },
+      { "label": "ECSTS, die Entity-Component-System-Bibliothek", "url": "https://github.com/Trixt0r/ecsts" }
+    ],
+    "sourcesNote": "Grundlage dieser Seite sind README, package.json, Dateistruktur und Commit-Verlauf des öffentlichen Repositorys (Stand 7. November 2026). Den Quellcode habe ich dafür nicht erneut im Detail durchgesehen; es gibt keine Screenshots, weil ich keine aktuellen veröffentlichten Aufnahmen habe."
+  },
+  {
+    "id": "spriter",
+    "seoTitle": "Spriter-Runtime für Java: Bibliothek für SCML- und SCON-Animationen | Heinrich Reich",
+    "description": "Generische Java-Bibliothek zum Einlesen und Abspielen von Spriter-Animationen (SCML, SCON) mit Beispielen für LibGDX, LWJGL, Slick2D und Java2D. Aufbau, Grenzen und Status.",
+    "heading": "Spriter-Runtime für Java",
+    "lead": "Eine Java-Bibliothek, die Animationsdateien der 2D-Animationssoftware Spriter einliest und in unterschiedlichen Java-Grafikumgebungen abspielbar macht.",
+    "status": "Nicht mehr aktiv weiterentwickelt (eigene Entwicklung 2012–2020)",
+    "period": "2012 – 2020",
+    "updatedAt": "2026-11-07",
+    "sections": [
+      {
+        "id": "overview",
+        "heading": "Was das Projekt macht",
+        "paragraphs": [
+          "Spriter ist eine 2D-Animationssoftware von BrashMonkey. Die Bibliothek liest deren Dateiformate SCML und SCON ein und stellt daraus ein Datenmodell sowie einen Player zur Verfügung, der Animationen berechnet. Sie richtet sich an Java-Entwickler, die Spriter-Animationen in eigenen Spielen oder Anwendungen abspielen wollen.",
+          "Zu den im README beschriebenen Funktionen gehören Wechsel von Animation, Tempo und Zeit, Transformationen, Skelett- und Objektmanipulation zur Laufzeit, Listener für Ereignisse, Bounding Boxes mit Kollisionstests, Interpolation und Kombination von Animationen, Inverse Kinematik, Attachments und Character Maps."
+        ]
+      },
+      {
+        "id": "constraints",
+        "heading": "Rahmenbedingungen",
+        "paragraphs": [
+          "Java-Spiele und -Anwendungen nutzen sehr unterschiedliche Grafikschichten. Die Bibliothek sollte deshalb nicht an eine bestimmte Rendering-Technik gebunden sein. Das README nennt dafür Beispiele für LWJGL, Slick2D, Java2D und LibGDX."
+        ]
+      },
+      {
+        "id": "role",
+        "heading": "Meine Rolle",
+        "paragraphs": [
+          "Ich habe die Bibliothek ab November 2012 entwickelt; der Copyright-Vermerk in der LICENSE.txt nennt mich (2016, Trixt0r / Heinrich Reich). Später kamen Beiträge anderer hinzu: Im September 2022 wurde ein Pull Request eines weiteren Entwicklers zur GWT-Kompatibilität zusammengeführt."
+        ]
+      },
+      {
+        "id": "decisions",
+        "heading": "Wichtige Designentscheidungen",
+        "items": [
+          "Backend-unabhängiger Kern: Anwender implementieren die abstrakten Klassen Loader (Sprites laden und verwalten) und Drawer (zeichnen und Debug-Darstellung). Datenmodell und Abspiellogik bleiben davon getrennt.",
+          "Klare Verarbeitungskette: SCMLReader oder SCONReader erzeugen ein Data-Objekt, daraus entsteht ein Player für eine Entity. Pro Frame wird aktualisiert und anschliessend gezeichnet.",
+          "Manipulation zwischen Update und Draw: Änderungen an Knochen und Objekten sind nur zwischen diesen beiden Aufrufen wirksam. Das hält die Reihenfolge der Berechnung nachvollziehbar.",
+          "Animationen kombinieren: Ein PlayerTweener interpoliert zwei Player mit einem Gewicht. Über baseBoneName lässt sich die Mischung auf einen Teil des Skeletts beschränken, zum Beispiel Schiessen während des Laufens.",
+          "Erweiterbare Inverse Kinematik: Standardmässig löst ein CCD-Resolver (Cyclic Coordinate Descent), eigene Algorithmen lassen sich über IKResolver ergänzen.",
+          "Attachments und Character Maps: Objekte lassen sich an animierte Knochen hängen, und Character Maps können zur Laufzeit angewendet werden."
+        ]
+      },
+      {
+        "id": "tradeoffs",
+        "heading": "Kompromisse und Grenzen",
+        "items": [
+          "Mehr Einrichtungsaufwand: Wer die Bibliothek nutzt, muss Loader und Drawer für sein Backend selbst schreiben oder ein Beispiel übernehmen.",
+          "Beispiele nicht optimiert: Laut README sind alle Beispiele ausser dem für LibGDX nicht auf Performance getrimmt.",
+          "Tweening braucht ähnliche Animationen: Interpolation funktioniert laut README nur sinnvoll, wenn beide Animationen eine ähnliche Struktur und gleich benannte Knochen haben.",
+          "Entwicklungsstand: Das README trägt den Zusatz „WIP“. Wie weit neuere Spriter-Versionen unterstützt werden, habe ich für diese Seite nicht geprüft."
+        ]
+      },
+      {
+        "id": "tech",
+        "heading": "Technologien und Gründe",
+        "items": [
+          "Java: Zielplattform sind Java-Spiele und -Anwendungen, unter anderem mit LibGDX.",
+          "Gradle und Maven: Das Repository enthält build.gradle und pom.xml zum Bauen und Veröffentlichen.",
+          "Eigenes Testprojekt SpriterTests: Beispiele wie AnimationSpeedTest, CollisionTest, InterpolationTest, InverseKinematicsTest, AttachmentTest und CompositionTest zeigen jeweils eine Funktion in einem lauffähigen Programm."
+        ]
+      },
+      {
+        "id": "status",
+        "heading": "Aktueller Stand",
+        "paragraphs": [
+          "Meine eigene Entwicklung lief von 2012 bis 2020. Heute entwickle ich die Bibliothek nicht aktiv weiter. Das Repository ist öffentlich und enthält eine Lizenzdatei (Apache License 2.0 laut LICENSE.txt). Der letzte Commit im Standard-Branch ist der Merge eines Pull Requests vom September 2022."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Repository auf GitHub", "url": "https://github.com/Trixt0r/spriter" },
+      { "label": "README mit Anleitung und Beispielen", "url": "https://github.com/Trixt0r/spriter#readme" },
+      { "label": "Spriter von BrashMonkey", "url": "https://brashmonkey.com" }
+    ],
+    "sourcesNote": "Grundlage dieser Seite sind README, LICENSE.txt, Dateistruktur und Commit-Verlauf des öffentlichen Repositorys (Stand 7. November 2026). Den Quellcode habe ich dafür nicht erneut im Detail durchgesehen."
+  }
+]

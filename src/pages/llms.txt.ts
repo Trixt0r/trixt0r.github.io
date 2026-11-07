@@ -1,20 +1,25 @@
 import type { APIRoute } from "astro";
 
 import { getContent } from "../lib/content";
-import { buildPath, locales } from "../lib/i18n";
+import { locales } from "../lib/i18n";
+import { absoluteUrl, findProjectPage, projectSuffix } from "../lib/seo";
 
-const site = import.meta.env.SITE;
-const basePath = import.meta.env.BASE_URL;
 const content = getContent("en");
 const languageNames = { en: "English", de: "German", ru: "Russian" };
 
 export const GET: APIRoute = () => {
-  const pages = locales.map((locale) => {
-    const url = new URL(buildPath(basePath, locale, "/"), site).toString();
-    return `- [${languageNames[locale]} portfolio](${url}): Professional profile, skills, experience, projects, education, and contact details.`;
-  });
+  const portfolio = locales.map(
+    (locale) =>
+      `- [${languageNames[locale]} portfolio](${absoluteUrl(locale)}): Professional profile, skills, experience, projects, education, and contact details.`
+  );
+  const projects = content.projects.flatMap((project) =>
+    locales.flatMap((locale) => {
+      const page = findProjectPage(locale, project.id);
+      return page ? [`- [${page.heading} (${languageNames[locale]})](${absoluteUrl(locale, projectSuffix(project.id))}): ${page.description}`] : [];
+    })
+  );
 
-  const body = `# ${content.profile.name}\n\n> ${content.seo.description}\n\n## Portfolio\n\n${pages.join("\n")}\n`;
+  const body = `# ${content.profile.name}\n\n> ${content.seo.description}\n\n## Portfolio\n\n${portfolio.join("\n")}\n\n## Projects\n\n${projects.join("\n")}\n`;
 
   return new Response(body, {
     headers: {

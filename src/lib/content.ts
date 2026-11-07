@@ -6,6 +6,7 @@ import deSummary from "../../content/de/summary.json";
 import deImpact from "../../content/de/impact.json";
 import deExperience from "../../content/de/experience.json";
 import deProjects from "../../content/de/projects.json";
+import deProjectPages from "../../content/de/project-pages.json";
 import deSkills from "../../content/de/skills.json";
 import deWorkingStyle from "../../content/de/working-style.json";
 import deLanguages from "../../content/de/languages.json";
@@ -21,6 +22,7 @@ import enSummary from "../../content/en/summary.json";
 import enImpact from "../../content/en/impact.json";
 import enExperience from "../../content/en/experience.json";
 import enProjects from "../../content/en/projects.json";
+import enProjectPages from "../../content/en/project-pages.json";
 import enSkills from "../../content/en/skills.json";
 import enWorkingStyle from "../../content/en/working-style.json";
 import enLanguages from "../../content/en/languages.json";
@@ -36,6 +38,7 @@ import ruSummary from "../../content/ru/summary.json";
 import ruImpact from "../../content/ru/impact.json";
 import ruExperience from "../../content/ru/experience.json";
 import ruProjects from "../../content/ru/projects.json";
+import ruProjectPages from "../../content/ru/project-pages.json";
 import ruSkills from "../../content/ru/skills.json";
 import ruWorkingStyle from "../../content/ru/working-style.json";
 import ruLanguages from "../../content/ru/languages.json";
@@ -53,6 +56,7 @@ const content: Record<Locale, LocaleContent> = {
     impact: deImpact,
     experience: deExperience,
     projects: deProjects,
+    projectPages: deProjectPages,
     skills: deSkills,
     workingStyle: deWorkingStyle,
     languages: deLanguages,
@@ -69,6 +73,7 @@ const content: Record<Locale, LocaleContent> = {
     impact: enImpact,
     experience: enExperience,
     projects: enProjects,
+    projectPages: enProjectPages,
     skills: enSkills,
     workingStyle: enWorkingStyle,
     languages: enLanguages,
@@ -85,6 +90,7 @@ const content: Record<Locale, LocaleContent> = {
     impact: ruImpact,
     experience: ruExperience,
     projects: ruProjects,
+    projectPages: ruProjectPages,
     skills: ruSkills,
     workingStyle: ruWorkingStyle,
     languages: ruLanguages,

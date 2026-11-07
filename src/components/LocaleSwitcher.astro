@@ -7,19 +7,24 @@ interface Props {
   pathSuffix?: string;
   basePath: string;
   labels: Labels;
+  /** Locales in which the current page exists; others are not linked. */
+  available?: Locale[];
 }
 
-const { locale, pathSuffix = "/", basePath, labels } = Astro.props;
+const { locale, pathSuffix = "/", basePath, labels, available = locales } = Astro.props;
+const languageNames: Record<Locale, string> = { de: "Deutsch", en: "English", ru: "Русский" };
 ---
 
 <nav class="locale-links" aria-label={labels.localeLabel}>
-  {locales.map((value) => (
+  {locales.filter((value) => available.includes(value)).map((value) => (
     <a
       href={buildPath(basePath, value, pathSuffix)}
-      target="_self"
       class:list={{ "control-group__item": true, "is-active": value === locale }}
       data-locale-link
       data-locale={value}
+      lang={value}
+      hreflang={value}
+      aria-label={`${value.toUpperCase()} – ${languageNames[value]}`}
       aria-current={value === locale ? "page" : undefined}
     >
       {value.toUpperCase()}
@@ -28,18 +33,10 @@ const { locale, pathSuffix = "/", basePath, labels } = Astro.props;
 </nav>
 
 <script>
-  const localeLinks = document.querySelectorAll("[data-locale-link]");
-
-  for (const link of localeLinks) {
+  // Remember an explicit choice so the root URL does not override it on the next visit.
+  for (const link of document.querySelectorAll<HTMLAnchorElement>("[data-locale-link]")) {
     link.addEventListener("click", () => {
-      if (!(link instanceof HTMLElement)) {
-        return;
-      }
-
-      const nextLocale = link.dataset.locale;
-      if (nextLocale) {
-        localStorage.setItem("preferred-locale", nextLocale);
-      }
+      try { localStorage.setItem("preferred-locale", link.dataset.locale ?? ""); } catch {}
     });
   }
 </script>

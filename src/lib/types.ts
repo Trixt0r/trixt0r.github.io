@@ -11,6 +11,7 @@ export interface Profile {
 export interface Hero {
   headline: string;
   subheadline: string;
+  lead: string;
   primaryCtaLabel: string;
   secondaryCtaLabel: string;
 }
@@ -53,6 +54,33 @@ export interface ProjectItem {
   summary: string;
   tech: string[];
   featured: boolean;
+}
+
+export interface ProjectPageSection {
+  id: string;
+  heading: string;
+  paragraphs?: string[];
+  items?: string[];
+}
+
+export interface ProjectPageLink {
+  label: string;
+  url: string;
+}
+
+/** Long-form page for a project; `id` matches a ProjectItem id and doubles as the URL slug. */
+export interface ProjectPage {
+  id: string;
+  seoTitle: string;
+  description: string;
+  heading: string;
+  lead: string;
+  status: string;
+  period: string;
+  updatedAt: string;
+  sections: ProjectPageSection[];
+  links: ProjectPageLink[];
+  sourcesNote: string;
 }
 
 export interface SkillGroup {
@@ -151,6 +179,7 @@ export interface LocaleContent {
   impact: ImpactItem[];
   experience: ExperienceItem[];
   projects: ProjectItem[];
+  projectPages: ProjectPage[];
   skills: Skills;
   workingStyle: WorkingStyle;
   languages: Languages;

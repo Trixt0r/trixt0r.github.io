@@ -1,23 +1,38 @@
 ---
-import "../styles/tokens.css";
-import "../styles/base.css";
-import "../styles/components.css";
+import "../styles/site.css";
 
 import type { LocaleContent, Locale } from "../lib/types";
-import { buildPath, locales } from "../lib/i18n";
+import { locales } from "../lib/i18n";
+import { absoluteUrl, alternatesFor, assetUrl, homeSuffix, localePath } from "../lib/seo";
 
 interface Props {
   locale: Locale;
   content: LocaleContent;
-  pageTitle?: string;
+  /** Page-specific title and description; the homepage falls back to the shared SEO content. */
+  title?: string;
+  description?: string;
+  /** Route suffix without locale prefix, e.g. "/" or "/projects/ecsts/". */
   pathSuffix?: string;
+  /** Locales in which this exact page exists. Only these get hreflang annotations. */
+  availableLocales?: Locale[];
+  structuredData?: object;
   noindex?: boolean;
+  /** Root URL only: send visitors to /ru/ or /en/ based on browser language (German stays here). */
+  detectLanguage?: boolean;
 }
 
-const { locale, content, pageTitle, pathSuffix = "/", noindex = false } = Astro.props;
-const title = pageTitle ? `${pageTitle} | ${content.profile.name}` : content.seo.title;
-const description = content.seo.description;
-const baseUrl = import.meta.env.SITE;
+const {
+  locale,
+  content,
+  title = content.seo.title,
+  description = content.seo.description,
+  pathSuffix = homeSuffix,
+  availableLocales = locales,
+  structuredData,
+  noindex = false,
+  detectLanguage = false
+} = Astro.props;
+const redirectTargets = { ru: localePath("ru"), en: localePath("en") };
 const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const siteName = `${content.profile.name} Portfolio`;
 const localeCodes: Record<Locale, string> = {
@@ -25,57 +40,10 @@ const localeCodes: Record<Locale, string> = {
   en: "en_US",
   ru: "ru_RU"
 };
-const alternateLinks = locales.map((currentLocale) => ({
-  locale: currentLocale,
-  href: new URL(buildPath(import.meta.env.BASE_URL, currentLocale, pathSuffix), baseUrl).toString()
-}));
-const canonical = alternateLinks.find((entry) => entry.locale === locale)?.href ?? new URL(Astro.url.pathname, baseUrl).toString();
-const siteRoot = new URL(import.meta.env.BASE_URL, baseUrl).toString();
-const personId = `${siteRoot}#person`;
-const profileImage = new URL(assetPath("profile-avatar.jpg"), baseUrl).toString();
-const socialImage = new URL(assetPath("og-image.png"), baseUrl).toString();
+const alternates = alternatesFor(pathSuffix, availableLocales);
+const canonical = absoluteUrl(locale, pathSuffix);
+const socialImage = assetUrl("og-image.png");
 const socialImageAlt = `${content.profile.name} – ${content.summary.currentRoleLabel}, ${content.profile.location}`;
-const profileUrl = new URL(buildPath(import.meta.env.BASE_URL, locale), baseUrl).toString();
-const addressLocality = content.profile.location.split(",")[0].trim();
-const knowsAbout = [...new Set(content.skills.groups.flatMap((group) => group.items))];
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "@id": canonical,
-  url: canonical,
-  name: title,
-  description,
-  inLanguage: locale,
-  dateModified: content.seo.updatedAt,
-  mainEntity: {
-    "@type": "Person",
-    "@id": personId,
-    name: content.profile.name,
-    alternateName: "Trixt0r",
-    jobTitle: content.summary.currentRoleLabel,
-    description: content.summary.blurb,
-    url: profileUrl,
-    image: profileImage,
-    email: `mailto:${content.profile.email}`,
-    telephone: content.profile.phone,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality,
-      addressCountry: "CH"
-    },
-    worksFor: {
-      "@type": "Organization",
-      name: "zeit ag"
-    },
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Universität Bern"
-    },
-    knowsAbout,
-    knowsLanguage: content.languages.items.map((item) => item.name),
-    sameAs: [content.links.linkedin, content.links.github, "https://www.npmjs.com/~trixt0r"]
-  }
-};
 ---
 
 <!doctype html>
@@ -83,7 +51,6 @@ const structuredData = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <base target="_blank" />
     <script is:inline>
       (() => {
         let saved;
@@ -94,6 +61,24 @@ const structuredData = {
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>
+    {detectLanguage && <script is:inline define:vars={{ targets: redirectTargets }}>
+      (() => {
+        try {
+          // Skip bots and visitors who navigated here from this site (e.g. clicked "DE").
+          if (/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)) return;
+          if (document.referrer && new URL(document.referrer).origin === location.origin) return;
+          let saved;
+          try { saved = localStorage.getItem("preferred-locale"); } catch {}
+          let locale = saved === "de" || saved === "en" || saved === "ru" ? saved : null;
+          if (!locale) {
+            const langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""]).map((l) => String(l).toLowerCase());
+            const match = langs.find((l) => l.startsWith("de") || l.startsWith("ru"));
+            locale = match ? (match.startsWith("ru") ? "ru" : "de") : "en";
+          }
+          if (locale !== "de") location.replace(targets[locale]);
+        } catch {}
+      })();
+    </script>}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={content.profile.name} />
@@ -101,10 +86,10 @@ const structuredData = {
     <meta name="theme-color" content="#f6f3eb" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonical} />
-    {alternateLinks.map((entry) => (
+    {alternates.entries.map((entry) => (
       <link rel="alternate" hreflang={entry.locale} href={entry.href} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={new URL(buildPath(import.meta.env.BASE_URL, "de", pathSuffix), baseUrl).toString()} />
+    <link rel="alternate" hreflang="x-default" href={alternates.xDefault} />
     <link rel="icon" href={assetPath("favicon.svg")} type="image/svg+xml" />
     <link rel="alternate icon" href={assetPath("favicon.ico")} sizes="any" />
     <link rel="apple-touch-icon" href={assetPath("apple-touch-icon.png")} />
@@ -121,7 +106,7 @@ const structuredData = {
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={socialImageAlt} />
     <meta property="og:locale" content={localeCodes[locale]} />
-    {alternateLinks.filter((entry) => entry.locale !== locale).map((entry) => (
+    {alternates.entries.filter((entry) => entry.locale !== locale).map((entry) => (
       <meta property="og:locale:alternate" content={localeCodes[entry.locale]} />
     ))}
     <meta name="twitter:card" content="summary_large_image" />
@@ -129,7 +114,7 @@ const structuredData = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:image:alt" content={socialImageAlt} />
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>}
   </head>
   <body>
     <slot />

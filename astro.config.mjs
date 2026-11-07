@@ -9,5 +9,8 @@ export default defineConfig({
   site,
   base,
   output: "static",
-  build: { inlineStylesheets: "always" }
+  build: { inlineStylesheets: "always" },
+  // German is served from the site root. GitHub Pages cannot send HTTP redirects, so this emits a
+  // static stub for the former /de/ URL (meta refresh plus canonical link pointing at the root).
+  redirects: { "/de": "/" }
 });

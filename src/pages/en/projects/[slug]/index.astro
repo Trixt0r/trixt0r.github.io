@@ -1,0 +1,12 @@
+---
+import ProjectPageView from "../../../../components/ProjectPageView.astro";
+import { getContent } from "../../../../lib/content";
+
+export function getStaticPaths() {
+  return getContent("en").projectPages.map((page) => ({ params: { slug: page.id } }));
+}
+
+const { slug } = Astro.params;
+---
+
+<ProjectPageView locale="en" id={slug!} />

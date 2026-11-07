@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LocaleSwitcher from "./LocaleSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+import TechPill from "./TechPill.astro";
+import "../styles/portfolio.css";
+import { getContent } from "../lib/content";
+import { buildProjectStructuredData, findProjectPage, localePath, projectPageLocales, projectSuffix } from "../lib/seo";
+import type { Locale } from "../lib/types";
+
+interface Props {
+  locale: Locale;
+  id: string;
+}
+
+const { locale, id } = Astro.props;
+const content = getContent(locale);
+const page = findProjectPage(locale, id)!;
+const project = content.projects.find((item) => item.id === id)!;
+const basePath = import.meta.env.BASE_URL;
+const home = localePath(locale);
+const copy = {
+  de: { skip: "Zum Inhalt springen", nav: "Hauptnavigation", profile: "Profil", projects: "Projekte", breadcrumb: "Brotkrümel-Navigation", status: "Status", period: "Zeitraum", tech: "Technologien", links: "Links und Quellen", back: "Zurück zum Profil", repository: "Repository auf GitHub" },
+  en: { skip: "Skip to content", nav: "Main navigation", profile: "Profile", projects: "Projects", breadcrumb: "Breadcrumb", status: "Status", period: "Period", tech: "Technologies", links: "Links and sources", back: "Back to profile", repository: "Repository on GitHub" },
+  ru: { skip: "К содержанию", nav: "Основная навигация", profile: "Профиль", projects: "Проекты", breadcrumb: "Навигационная цепочка", status: "Статус", period: "Период", tech: "Технологии", links: "Ссылки и источники", back: "Назад к профилю", repository: "Репозиторий на GitHub" }
+}[locale];
+const suffix = projectSuffix(id);
+---
+<BaseLayout
+  locale={locale}
+  content={content}
+  title={page.seoTitle}
+  description={page.description}
+  pathSuffix={suffix}
+  availableLocales={projectPageLocales(id)}
+  structuredData={buildProjectStructuredData(locale, content, id, content.profile.name)}
+>
+  <div class="portfolio" id="top">
+    <a class="portfolio-skip" href="#main">{copy.skip}</a>
+    <header class="portfolio-header">
+      <div class="portfolio-container header-inner">
+        <a class="portfolio-brand" href={home}><span class="brand-mark" aria-hidden="true">hr<span>.</span></span><span>{content.profile.name}</span></a>
+        <nav class="portfolio-nav" aria-label={copy.nav}>
+          <a href={home}>{copy.profile}</a>
+          <a href={`${home}#projects`}>{copy.projects}</a>
+        </nav>
+        <div class="header-controls"><LocaleSwitcher locale={locale} labels={content.labels} basePath={basePath} pathSuffix={suffix} available={projectPageLocales(id)} /><ThemeToggle labels={content.labels} /></div>
+      </div>
+    </header>
+    <main id="main" class="portfolio-container project-page">
+      <nav class="breadcrumb" aria-label={copy.breadcrumb}>
+        <ol>
+          <li><a href={home}>{content.profile.name}</a></li>
+          <li><a href={`${home}#projects`}>{copy.projects}</a></li>
+          <li aria-current="page">{project.name}</li>
+        </ol>
+      </nav>
+      <article>
+        <header class="project-hero">
+          <h1>{page.heading}</h1>
+          <p class="project-lead">{page.lead}</p>
+          <dl class="project-facts">
+            <div><dt>{copy.status}</dt><dd>{page.status}</dd></div>
+            <div><dt>{copy.period}</dt><dd>{page.period}</dd></div>
+            <div><dt>{copy.tech}</dt><dd><ul class="tech-list" aria-label={copy.tech}>{project.tech.map((tech) => <TechPill label={tech} />)}</ul></dd></div>
+          </dl>
+        </header>
+        {page.sections.map((section) => (
+          <section class="project-section" aria-labelledby={`${section.id}-title`}>
+            <h2 id={`${section.id}-title`}>{section.heading}</h2>
+            {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+            {section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}
+          </section>
+        ))}
+        <section class="project-section" aria-labelledby="links-title">
+          <h2 id="links-title">{copy.links}</h2>
+          <ul class="project-links">{page.links.map((link) => <li><a href={link.url} target="_blank" rel="noopener">{link.label} <span aria-hidden="true">↗</span></a></li>)}</ul>
+          <p class="project-sources">{page.sourcesNote}</p>
+        </section>
+      </article>
+      <p class="project-back"><a href={`${home}#projects`}>← {copy.back}</a></p>
+    </main>
+    <footer class="portfolio-footer"><div class="portfolio-container footer-inner"><span>© {new Date().getFullYear()} {content.profile.name}</span><a href="#top">↑ {content.profile.name}</a></div></footer>
+  </div>
+</BaseLayout>

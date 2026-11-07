@@ -1,0 +1,247 @@
+[
+  {
+    "id": "ecsts",
+    "seoTitle": "ECSTS: Entity-Component-System for TypeScript | Heinrich Reich",
+    "description": "ECSTS (@trixt0r/ecs) is a small entity-component-system library for TypeScript and JavaScript. Structure, design decisions, limits and status of the open source project.",
+    "heading": "ECSTS – an entity-component-system for TypeScript",
+    "lead": "ECSTS is an entity-component-system library for TypeScript and JavaScript. It separates data (components) from behaviour (systems) and deliberately contains no game-specific logic.",
+    "status": "Published on npm (version 0.5.1, March 2022), pre-1.0 API",
+    "period": "since 2019",
+    "updatedAt": "2026-11-07",
+    "sections": [
+      {
+        "id": "overview",
+        "heading": "What the project does",
+        "paragraphs": [
+          "An entity-component-system (ECS) structures an application so that entities merely carry components, while systems implement the behaviour for every entity that owns certain components. ECSTS provides the building blocks: Component, Entity, System and an Engine that ties systems and entities together.",
+          "The package is published on npm as @trixt0r/ecs. Its README describes it as a library for any use case. The example in the repository is a small rectangle simulation with position, size and velocity as components and systems for movement, gravity, collision and rendering."
+        ]
+      },
+      {
+        "id": "constraints",
+        "heading": "Goals and constraints",
+        "paragraphs": [
+          "According to the README, the library should work without game-specific logic, and according to its npm description it should run in any JavaScript environment. Accordingly, the changelog lists ES5 as the compile target from version 0.2.2. Type declarations ship with the package."
+        ]
+      },
+      {
+        "id": "role",
+        "heading": "My role",
+        "paragraphs": [
+          "I created the repository in May 2019 and published the first version on npm at the end of May 2019. The repository lives in my GitHub account; the README welcomes issues and pull requests. ECSTS is also listed as a dependency of my editor project Y.A.M.E."
+        ]
+      },
+      {
+        "id": "decisions",
+        "heading": "Key design decisions",
+        "items": [
+          "Components are plain types: Component is an interface without required members. The README recommends classes because systems look components up by type.",
+          "No built-in ID generation: AbstractEntity is abstract and the ID comes from the application. The library does not impose an ID scheme.",
+          "Aspects instead of manual filters: since version 0.1.0, Aspect (with all, one and exclude) replaces the earlier Filter. A system describes which components it needs and receives the matching entities. From 0.2.0, aspects also dispatch events when entities and components are added or removed.",
+          "Less boilerplate for systems: AbstractEntitySystem accepts the required component types in its constructor and handles the aspect setup.",
+          "Synchronous or asynchronous: process may be async. engine.run can execute systems successively (SUCCESSIVE) or in parallel (PARALLEL).",
+          "Observable: entities, systems and the engine are dispatchers on which listeners can be registered.",
+          "Lookup by ID: the EntityCollection introduced in 0.5.0 allows calls such as engine.entities.get(1)."
+        ]
+      },
+      {
+        "id": "tradeoffs",
+        "heading": "Tradeoffs and limitations",
+        "items": [
+          "Version 0.x: the API has changed between versions, for example in 0.1.0, when Filter became Aspect and Engine.getFilter was removed. Anyone using ECSTS should pin the version and read the changelog.",
+          "Deliberately minimal: rendering, physics, input and asset management are not part of the library and must come from the application.",
+          "Older toolchain: the development dependencies include TypeScript 3.9 and Jest 27. The project has not been maintained further since 2022."
+        ]
+      },
+      {
+        "id": "tech",
+        "heading": "Technologies and why",
+        "items": [
+          "TypeScript: types and declaration files (build/index.d.ts) are part of the package, so systems and components can be written with type checking.",
+          "Jest: every core module (Aspect, Collection, Component, Dispatcher, Engine, Entity, EntityCollection, System) has a spec file. The changelog mentions 100% code coverage since 0.4.4.",
+          "ESLint and Prettier: configuration for consistent code is part of the repository.",
+          "npm: distribution as @trixt0r/ecs; 25 versions since May 2019."
+        ]
+      },
+      {
+        "id": "status",
+        "heading": "Current status",
+        "paragraphs": [
+          "The current npm version is 0.5.1, published on 19 March 2022. The last commit on the default branch is from the same day. The project is published and usable but not actively developed at the moment. I do not quote usage numbers here."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Repository on GitHub", "url": "https://github.com/Trixt0r/ecsts" },
+      { "label": "Package on npm", "url": "https://www.npmjs.com/package/@trixt0r/ecs" },
+      { "label": "“Rectangles” example on StackBlitz", "url": "https://stackblitz.com/edit/ecs-example-rectangles" },
+      { "label": "Changelog", "url": "https://github.com/Trixt0r/ecsts/blob/master/CHANGELOG.MD" }
+    ],
+    "sourcesNote": "This page is based on the README, changelog, package.json, file structure and commit history of the public repository, plus the npm registry (as of 7 November 2026). I did not re-read the source code in detail for it."
+  },
+  {
+    "id": "yame",
+    "seoTitle": "Y.A.M.E.: Extensible 2D map editor with Angular and Electron | Heinrich Reich",
+    "description": "Y.A.M.E. is a generic, plugin-extensible 2D map editor built with Angular, Electron and PixiJS. Structure, decisions, limitations and status of the project.",
+    "heading": "Y.A.M.E. – an extensible 2D map editor",
+    "lead": "Y.A.M.E. is a generic 2D map editor delivered as a desktop application. It is meant for any kind of two-dimensional map and can be extended through plugins.",
+    "status": "In development, no stable release published (package version 0.0.1)",
+    "period": "since 2016",
+    "updatedAt": "2026-11-07",
+    "sections": [
+      {
+        "id": "overview",
+        "heading": "What the project does",
+        "paragraphs": [
+          "Y.A.M.E. is an editor for 2D maps. The package description calls it “generic, extensible, for any kind of map”. The repository contains modules for the scene, tilesets, camera, toolbar, sidebar, assets and preferences, among others.",
+          "It is a private project built around my own workflows. A stable version that others can use is planned but not published yet."
+        ]
+      },
+      {
+        "id": "constraints",
+        "heading": "Starting point and goals",
+        "paragraphs": [
+          "The editor goes back to an older implementation based on Backbone. The README describes the Angular rewrite as a replacement for that version, which it calls buggy. It names these main goals:"
+        ],
+        "items": [
+          "Use Angular data binding and get rid of the custom Backbone implementation.",
+          "A faster publish/subscribe system based on eventemitter3.",
+          "Promises instead of Node.js-style callbacks.",
+          "Clean up the component and entity system to improve maintainability."
+        ]
+      },
+      {
+        "id": "role",
+        "heading": "My role",
+        "paragraphs": [
+          "I created the repository in October 2016 and develop the editor in my spare time. package.json lists my name as author. I did not review whether or which contributions from others went in for this page."
+        ]
+      },
+      {
+        "id": "decisions",
+        "heading": "Key architectural decisions",
+        "paragraphs": [
+          "The following points follow from the repository structure and the package manifest:"
+        ],
+        "items": [
+          "Two clearly separated processes: the Electron main process (src/main) handles files, directories, dialogs and plugins over IPC. The Angular user interface (src/ng) runs in the renderer. Shared code (src/common) contains the scene model, plugin management, logging and pub/sub, among other things.",
+          "Plugin architecture: plugins are discovered through config.json (pattern ./node_modules/@yame/*) and loaded by a plugin manager. The yame-dev plugin serves as an example in development mode and reloads the UI when code changes.",
+          "Scene model with entities and components: the code under src/common/scene works with entity and component concepts; ECSTS (@trixt0r/ecs) is listed as a dependency.",
+          "Rendering with PixiJS: maps are drawn with WebGL, with tilemap support through @pixi/tilemap.",
+          "State and language: NGXS manages editor state and ngx-translate provides translations."
+        ]
+      },
+      {
+        "id": "tradeoffs",
+        "heading": "Tradeoffs and limitations",
+        "items": [
+          "No stable release: the editor is started from source. package.json has scripts for packaging on Linux, Windows and macOS, but no builds are published.",
+          "Outdated README: the README on the default branch still describes the migration phase (branch ng2, Node 10). The dependencies in package.json are much newer (Angular 19, Electron 33), so the package manifest and the source code are the reliable references.",
+          "Desktop rather than web: Electron allows direct file access but has more runtime overhead than a plain web application.",
+          "Personal project: progress depends on my spare time."
+        ]
+      },
+      {
+        "id": "tech",
+        "heading": "Technologies and why",
+        "items": [
+          "Angular 19: the editor’s user interface; its data binding replaces the earlier hand-built Backbone solution.",
+          "Electron 33: desktop shell with access to the file system.",
+          "TypeScript: used throughout the main process, shared code and the UI.",
+          "PixiJS 6 with @pixi/tilemap: drawing maps with WebGL.",
+          "NGXS and ngx-translate: state management and multilingual UI."
+        ]
+      },
+      {
+        "id": "status",
+        "heading": "Current status",
+        "paragraphs": [
+          "The default branch records updates to Angular 18 (June 2024) and Angular 19 (January 2025) as well as Electron updates. The latest feature commit, from 16 June 2025, adds removing tiles. So the project is in progress but not published as a finished product."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Repository on GitHub", "url": "https://github.com/Trixt0r/yame" },
+      { "label": "ECSTS, the entity-component-system library", "url": "https://github.com/Trixt0r/ecsts" }
+    ],
+    "sourcesNote": "This page is based on the README, package.json, file structure and commit history of the public repository (as of 7 November 2026). I did not re-read the source code in detail for it. There are no screenshots because I have no current published captures."
+  },
+  {
+    "id": "spriter",
+    "seoTitle": "Spriter runtime for Java: library for SCML and SCON animations | Heinrich Reich",
+    "description": "Generic Java library for loading and playing Spriter animations (SCML, SCON) with examples for LibGDX, LWJGL, Slick2D and Java2D. Structure, limitations and status.",
+    "heading": "Spriter runtime for Java",
+    "lead": "A Java library that reads animation files from the 2D animation software Spriter and makes them playable in different Java graphics environments.",
+    "status": "No longer actively developed (my own development 2012–2020)",
+    "period": "2012 – 2020",
+    "updatedAt": "2026-11-07",
+    "sections": [
+      {
+        "id": "overview",
+        "heading": "What the project does",
+        "paragraphs": [
+          "Spriter is a 2D animation tool from BrashMonkey. The library reads its SCML and SCON file formats and provides a data model and a player that computes the animations. It is aimed at Java developers who want to play Spriter animations in their own games or applications.",
+          "The README describes features such as switching animation, speed and time, transformations, bone and object manipulation at runtime, listeners for events, bounding boxes with collision tests, interpolation and composition of animations, inverse kinematics, attachments and character maps."
+        ]
+      },
+      {
+        "id": "constraints",
+        "heading": "Constraints",
+        "paragraphs": [
+          "Java games and applications use very different graphics layers, so the library should not be tied to one rendering technique. The README provides examples for LWJGL, Slick2D, Java2D and LibGDX."
+        ]
+      },
+      {
+        "id": "role",
+        "heading": "My role",
+        "paragraphs": [
+          "I developed the library starting in November 2012; the copyright notice in LICENSE.txt names me (2016, Trixt0r / Heinrich Reich). Contributions from others followed later: in September 2022, a pull request from another developer for GWT compatibility was merged."
+        ]
+      },
+      {
+        "id": "decisions",
+        "heading": "Key design decisions",
+        "items": [
+          "Backend-independent core: users implement the abstract classes Loader (loading and storing sprites) and Drawer (drawing and debug drawing). The data model and playback logic stay separate from them.",
+          "A clear processing chain: SCMLReader or SCONReader produce a Data object, from which a Player for an entity is created. Each frame is updated first and drawn afterwards.",
+          "Manipulation between update and draw: changes to bones and objects only take effect between those two calls, which keeps the order of computation predictable.",
+          "Combining animations: a PlayerTweener interpolates two players using a weight. With baseBoneName the blend can be limited to part of the skeleton, for example shooting while running.",
+          "Extensible inverse kinematics: a CCD resolver (cyclic coordinate descent) is the default, and other algorithms can be added through IKResolver.",
+          "Attachments and character maps: objects can be attached to animated bones, and character maps can be applied at runtime."
+        ]
+      },
+      {
+        "id": "tradeoffs",
+        "heading": "Tradeoffs and limitations",
+        "items": [
+          "More setup effort: users have to write Loader and Drawer for their backend or adopt one of the examples.",
+          "Examples not optimized: according to the README, all examples except the LibGDX one are not tuned for performance.",
+          "Tweening needs similar animations: according to the README, interpolation only makes sense if both animations have a similar structure and identically named bones.",
+          "Development state: the README carries a “WIP” note. I did not check how far newer Spriter versions are supported for this page."
+        ]
+      },
+      {
+        "id": "tech",
+        "heading": "Technologies and why",
+        "items": [
+          "Java: the target platform is Java games and applications, including LibGDX.",
+          "Gradle and Maven: the repository contains build.gradle and pom.xml for building and publishing.",
+          "A dedicated SpriterTests project: examples such as AnimationSpeedTest, CollisionTest, InterpolationTest, InverseKinematicsTest, AttachmentTest and CompositionTest each demonstrate one feature in a runnable program."
+        ]
+      },
+      {
+        "id": "status",
+        "heading": "Current status",
+        "paragraphs": [
+          "My own development ran from 2012 to 2020. I do not actively develop the library today. The repository is public and includes a license file (Apache License 2.0 according to LICENSE.txt). The last commit on the default branch is the merge of a pull request from September 2022."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Repository on GitHub", "url": "https://github.com/Trixt0r/spriter" },
+      { "label": "README with guide and examples", "url": "https://github.com/Trixt0r/spriter#readme" },
+      { "label": "Spriter by BrashMonkey", "url": "https://brashmonkey.com" }
+    ],
+    "sourcesNote": "This page is based on the README, LICENSE.txt, file structure and commit history of the public repository (as of 7 November 2026). I did not re-read the source code in detail for it."
+  }
+]

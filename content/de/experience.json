@@ -2,7 +2,7 @@
   {
     "id": "zeit-architect",
     "company": "zeit ag",
-    "role": "Software Architekt",
+    "role": "Softwarearchitekt",
     "location": "Sursee",
     "start": "2023-12",
     "end": null,
@@ -46,7 +46,7 @@
     "summary": "Arbeit an kundenrelevanten Produkten f\u00fcr die Schweizerische Post mit Fokus auf langfristige Wartbarkeit und Integration in bestehende Prozesse.",
     "highlights": [
       "Redesign, Refactoring und Wartung von WebStamp",
-      "Umsetzung einer mobilen und barrierearmen Zolldeklarationslosung",
+      "Umsetzung einer mobilen und barrierearmen Zolldeklarationsl\u00f6sung",
       "Arbeit in produktiven PHP- und JavaScript-Stacks mit MariaDB und Linux-Betrieb"
     ],
     "tech": ["CentOS", "MariaDB", "PHP", "Zend Framework", "JavaScript", "Aurelia", "Vue"],
