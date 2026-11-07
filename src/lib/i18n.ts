@@ -50,5 +50,6 @@ export function buildPath(basePath: string, locale: Locale, suffix = "/") {
   const normalizedBase = base === "/" ? "" : base;
   const cleanedSuffix = suffix === "/" ? "" : suffix.replace(/^\/+|\/+$/g, "");
   const suffixPart = cleanedSuffix ? `/${cleanedSuffix}` : "";
-  return `${normalizedBase}/${locale}${suffixPart}/`.replace(/\/$/, suffix.endsWith("/") || suffix === "/" ? "/" : "");
+  const localePart = locale === defaultLocale ? "" : `/${locale}`;
+  return `${normalizedBase}${localePart}${suffixPart}/`.replace(/\/$/, suffix.endsWith("/") || suffix === "/" ? "/" : "");
 }

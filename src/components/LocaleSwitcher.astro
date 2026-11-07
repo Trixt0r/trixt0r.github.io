@@ -1,5 +1,5 @@
 ---
-import { locales } from "../lib/i18n";
+import { buildPath, locales } from "../lib/i18n";
 import type { Locale, Labels } from "../lib/types";
 
 interface Props {
@@ -10,14 +10,12 @@ interface Props {
 }
 
 const { locale, pathSuffix = "/", basePath, labels } = Astro.props;
-const cleanedSuffix = pathSuffix.startsWith("/") ? pathSuffix : `/${pathSuffix}`;
-const base = basePath === "/" ? "" : basePath.replace(/\/$/, "");
 ---
 
 <nav class="locale-links" aria-label={labels.localeLabel}>
   {locales.map((value) => (
     <a
-      href={`${base}/${value}${cleanedSuffix === "/" ? "/" : cleanedSuffix}`}
+      href={buildPath(basePath, value, pathSuffix)}
       target="_self"
       class:list={{ "control-group__item": true, "is-active": value === locale }}
       data-locale-link
